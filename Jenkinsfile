@@ -10,6 +10,14 @@ pipeline {
                 git branch : "master" , url : "https://github.com/boot-wenze/boutique.git"
             }
         }
+
+      stage("Maven Build"){
+            
+            steps{
+                bat "mvn package"
+            }
+            
+        }
         
         stage("Create Docker Image"){
             
