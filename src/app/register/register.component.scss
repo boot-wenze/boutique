@@ -1,0 +1,51 @@
+@import '../../config';
+
+.body{
+    height: 100vh;
+    width: 100%;
+    font-family: $font-family;
+}
+
+.container{
+    width: 90%;
+    margin: auto;
+}
+
+.header{
+    text-align: left;
+
+    & > b{
+        color: $green;
+    }
+}
+
+.form-group{
+
+    .form-control{
+        width: 30%;
+        border: none;
+        outline: 1px solid black;
+        height: 2.5em;
+        margin-left: 1em;
+        border-radius: 4px;
+        padding: 0 1em;
+    }
+}
+.file{
+    display: inline-flex;
+    align-items: center;
+    gap: 0 1.5em;
+
+    .televerser{
+        background-color: #f2f2f2;
+        padding: 10px 2em;
+        cursor: pointer;
+        border-radius: 4px;
+        &:hover{
+            padding: 10px 2em;
+            border: 1px solid $green;
+            color: $green;
+            font-weight: bold;
+        }
+    }
+}

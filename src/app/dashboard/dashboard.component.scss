@@ -1,0 +1,64 @@
+@import "../../config";
+
+.dashboard{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: $font-family;
+}
+
+.dashboard-left{
+    width: 15%;
+    height: 100vh;
+    position: fixed;
+    inset: 0;
+    border-right: 1px solid #f2f2f2;
+
+    .div-brand{
+        text-align: center;
+        margin-bottom: 3em;
+        .brand{
+            width: 5em;
+            height: 5em;
+        }
+
+    }
+
+    .item{
+        width: 90%;
+        margin: 2em auto;
+        display: flex;
+        align-items: center;
+        padding: .5em .5em;
+        border-radius: 4px;
+        box-sizing: border-box;
+        cursor: pointer;
+        span:last-child{
+            margin-left: 1em;
+        }
+    }
+
+    .is-active{
+        background: linear-gradient(45deg, black, #1a1a1a, #333, #444, #555);
+        color: $green;
+
+        span:first-child{
+            background-color: white;
+            border-radius: 50%;
+            padding: .3em;
+            color: $green;
+        }
+        span:last-child{
+            font-weight: bold;
+        }
+    }
+}
+.dashboard-right{
+    width: 85%;
+    margin-left: 15%;
+
+    .container{
+        width: 90%;
+        margin: auto;
+    }
+}

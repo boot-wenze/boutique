@@ -1,0 +1,327 @@
+
+<div class="body-element" *ngIf="!isLoading" >
+
+    <nav class="navbar" #navbar>
+
+        <div class="brand">
+            <img src="./assets/wnz.png" alt="">
+        </div>
+
+        <div class="navbar-items">
+
+
+            <div (click)="loginForm()" class="login navbar-item">
+
+                <span class="material-icons">
+                    person
+                </span>
+                <!-- <span class="material-icons">
+                    expand_more
+                </span> -->
+            </div>
+
+            <div [routerLink]="['/commencer']" class="navbar-item">
+                <span>Commencer</span>
+                <span class="material-icons">
+                    expand_more
+                </span>
+            </div>
+
+
+        </div>
+
+    </nav>
+
+    <div class="login-form" [ngStyle]="{'display' : connect === false ? 'none' : 'block'}">
+        <input type="text" [(ngModel)]="identifiant" placeholder="Identifiant" name="id" class="form-control">
+        <input type="password" [(ngModel)]="password" placeholder="Mot de passe" name="mdp" class="form-control">
+        <button class="call-to-action" (click)="submit()" >Se connecter</button>
+    </div>
+
+    <div class="showcase">
+
+        <video id="video" autoplay loop muted>
+            <source src="./assets/wnz.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <div class="gradient-overlay"></div>
+
+        <div class="boutique">
+            <h1>
+                Créez votre boutique en quelques étapes simples
+                et rejoignez notre communauté prospère. <br>
+                Votre aventure avec nous commence ici.
+            </h1>
+
+            <p class="slogan">
+                Accéder à votre boutique, ajouter, modifier et supprimer des articles, ainsi que gérer tous les aspects de votre boutique en toute simplicité.
+            </p>
+
+            <div class="boutons">
+                <button class="call-to-action">
+                    Accéder à votre espace
+                </button>
+
+                <p class="explore">
+                    <span class="material-icons">
+                        keyboard_arrow_right
+                    </span>
+                    <span>Contactez notre équipe</span>
+                </p>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+    <!-- avantages -->
+    <div class="items">
+        <p class="header">Recommandé</p>
+        <h3>
+            Découvrez les avantages exclusifs de posséder votre espace de vente en ligne chez WENZE
+            : une expérience de gestion simplifiée,
+            une visibilité accrue et une audience sur
+            les réseaux à portée de main.
+        </h3>
+
+        <div class="flex-items">
+
+            <div class="card">
+                <h3 class="card-header">- Gérer sa boutique en ligne</h3>
+                <p class="card-body">
+                    Avec <b>WENZE</b>,
+                    la gestion de votre boutique en
+                    ligne devient un jeu d'enfant. <br>
+                    Notre interface intuitive et
+                    conviviale vous permet de
+                    télécharger vos produits,
+                    de les organiser en catégories
+                    et de personnaliser votre
+                    espace en fonction de votre
+                    marque. <br>
+                    Vous pouvez facilement ajouter des
+                    descriptions, des images attrayantes
+                    et des détails de prix. <br>
+                    Plus besoin d'être un expert
+                    technique pour offrir une expérience
+                    d'achat exceptionnelle à vos clients.
+
+                </p>
+            </div>
+            <div class="card">
+                <h3 class="card-header">- Une audience sur les réseaux </h3>
+                <p class="card-body">
+                    Les médias sociaux jouent un
+                    rôle essentiel dans la promotion
+                    d'une entreprise en ligne.
+                    En intégrant <b>WENZE</b>,
+                    vous bénéficiez de notre présence
+                    sur les réseaux sociaux et pouvez
+                    tirer parti de nos campagnes de
+                    marketing numérique pour atteindre
+                    une audience plus large. <br>
+                    Vous pouvez également partager
+                    vos produits directement sur vos
+                    propres plateformes,
+                    augmentant ainsi votre portée et
+                    votre engagement.
+                </p>
+            </div>
+            <div class="card">
+                <h3 class="card-header">- Suivre ses ventes à temps réel</h3>
+                <p class="card-body">
+                    La visibilité en temps réel sur
+                    vos performances est essentielle
+                    pour prendre des décisions éclairées. <br>
+                    Grâce à <b>WENZE</b>,
+                    vous avez accès à des tableaux de bord
+                    détaillés qui vous fournissent des
+                    informations précieuses sur vos ventes,
+                    vos stocks et vos tendances de produits.
+                    Cette transparence vous aide à ajuster
+                    votre stratégie de vente et à maximiser
+                    vos bénéfices.
+                </p>
+            </div>
+            <div class="card">
+                <h3 class="card-header">- Accroître sa visibilité</h3>
+                <p class="card-body">
+                    En tant que boutique <b>WENZE</b>,
+                    vous rejoignez une plateforme déjà
+                    établie et fréquentée par des clients avides
+                    de découvertes. Notre site attire un large public,
+                    vous offrant ainsi une visibilité accrue pour vos
+                    produits. De plus, nos outils de marketing et de
+                    promotion intégrés vous permettent de mettre en
+                    avant vos offres spéciales et de
+                    toucher de nouveaux clients potentiels
+                </p>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- details -->
+    <div class="details">
+        <div class="container">
+            <p class="header">#SoutenonsNosPME</p>
+            <h2>
+                Développez et entretenez votre activité avec nos ressources et formations.
+            </h2>
+
+
+            <div class="formations">
+                <div class="card">
+                    <p>
+                        Ces formations abordent <br>
+                        les principes essentiels du <br>
+                        marketing numérique.
+                    </p>
+                    <p class="explore">
+                        <span class="material-icons">
+                            keyboard_arrow_right
+                        </span>
+                        <span>Regarder maintenant</span>
+                    </p>
+                </div>
+
+                <div class="card">
+                    <p>
+                        Explorez les ressources gratuites <br>
+                        dédiées à la croissance de votre <br>
+                        petite entreprise.
+                    </p>
+                    <p class="explore">
+                        <span class="material-icons">
+                            keyboard_arrow_right
+                        </span>
+                        <span>Lire suite</span>
+                    </p>
+                </div>
+
+                <div class="card">
+                    <p>
+                        Profitez d'un plan sur mesure pour <br>
+                        atteindre vos objectifs <br>
+                        en marketing.
+                    </p>
+                    <p class="explore">
+                        <span class="material-icons">
+                            keyboard_arrow_right
+                        </span>
+                        <span>En savoir plus</span>
+                    </p>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Tarifs -->
+    <div class="tarifs">
+        <p class="header">Tarification</p>
+
+        <p class="paint">TARIFICATION</p>
+
+        <p class="intro">
+            Il est important de noter que nos tarifications de
+            maintenance ne concernent pas l'espace boutique en lui-même,
+            car chez <b>WENZE</b>, l'accès à l'espace boutique est totalement
+            gratuit. <br>Nous croyons en la promotion de l'entrepreneuriat
+            en ligne sans entraves initiales.
+            Nos tarifs de maintenance ont été conçus pour vous fournir
+            un soutien continu et de haute qualité pour maintenir votre
+            boutique en ligne <b>WENZE</b>, garantissant ainsi
+            une expérience optimale pour vos clients.
+        </p>
+
+        <div class="tarifs-element">
+
+            <div class="tarif">
+                <h2>Basique</h2>
+                <p>
+                    Si votre volume de ventes varie de <b>0</b> à <b>99</b> par mois,
+                    notre tarification basique de <b>10 $</b>
+                    vous assure une maintenance en douceur de votre boutique.
+                    Nous nous engageons à vous offrir un service de qualité
+                    pour vous permettre de
+                    vous concentrer sur la croissance de votre activité.
+                </p>
+            </div>
+            <div class="tarif">
+                <h2>Production</h2>
+                <p>
+                    Si vos ventes commencent à s'épanouir avec un volume
+                    mensuel de <b>100</b> à <b>449</b> ventes,
+                    notre tarification de <b>25 $</b> par mois vous
+                    offre une maintenance étendue pour gérer
+                    l'augmentation du trafic et des commandes.
+                </p>
+            </div>
+            <div class="tarif">
+                <h2>Avancé</h2>
+                <p>
+                    Lorsque votre boutique atteint le niveau avancé
+                    avec <b>250</b> à <b>699</b> ventes mensuelles,
+                    notre tarification de <b>50 $</b>  par mois vous
+                    offre un soutien approfondi pour maintenir
+                    une expérience client exceptionnelle et pour
+                    faire face à la croissance continue.
+                </p>
+            </div>
+            <div class="tarif">
+                <h2>Entreprise</h2>
+                <p>
+                    Pour les entreprises prospères avec plus de <b>699</b> ventes
+                    par mois, notre équipe dédiée travaillera avec vous
+                    pour créer un plan
+                    personnalisé répondant à vos besoins spécifiques.
+                </p>
+                <button class="call-to-action">Contactez-nous</button>
+            </div>
+
+        </div>
+
+        <p class="intro">
+            Ces tarifications de maintenance sont
+            conçues pour garantir la stabilité,
+            la sécurité et l'évolutivité de votre
+            boutique en ligne <b>WENZE</b>,
+            vous permettant de vous concentrer sur
+            la croissance de votre activité.
+            Nous nous engageons à fournir des services de
+            haute qualité qui répondent à vos besoins
+            tout au long de votre parcours sur <b>WENZE</b>.
+
+            <br> <br>
+            Si vous avez des questions supplémentaires
+            ou si vous souhaitez en savoir plus sur
+            nos tarifications de maintenance,
+            n'hésitez pas à nous contacter. <br>
+            Notre équipe est là pour vous aider à
+            prendre la meilleure décision pour votre entreprise.
+
+        </p>
+    </div>
+
+    <!-- footer -->
+    <footer class="footer">
+        <div class="header">
+            <p>Conditions générales</p>
+            <p>Créez un compte</p>
+            <p>Tarification</p>
+        </div>
+
+        <p>Tous droits  réservés &copy; <b>2023</b></p>
+    </footer>
+
+</div>
+
+
+<app-loading *ngIf="isLoading" ></app-loading>

@@ -1,0 +1,45 @@
+
+<div class="body" *ngIf="!isLoading && !swal">
+
+    <div class="container">
+
+        <img src="./assets/wnz.png" class="brand" alt="">
+
+        <form ngNativeValidate (submit)="submit()" >
+
+            <div class="form-group">
+                <label for="">Secteur d'activité</label>
+                <select class="form-control" [(ngModel)]="activity"  name="secteur" required>
+                    <option value="" hidden>Faites votre choix</option>
+                    <option value="BOUTIQUE">BOUTIQUE</option>
+                    <option value="SUPER MARCHE">SUPER MARCHE</option>
+                    <option value="WENZE">WENZE</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="">Nom de <b>{{activity}}</b></label>
+                <input type="text" [(ngModel)]="nom" class="form-control" required name="a" placeholder="Nom de l'activité">
+            </div>
+
+            <div class="form-group">
+                <label for="">Mot de passe</label>
+                <input type="password" minlength="8" maxlength="50" [(ngModel)]="mdp" class="form-control" name="b" required placeholder="Mot de passe">
+            </div>
+
+            <div class="form-group">
+                <label for="">Confirmer le mot de passe</label>
+                <input type="password" minlength="8" maxlength="50" [(ngModel)]="cfn" class="form-control" name="c" required placeholder="Mot de passe">
+            </div>
+
+            <button type="submit"  class="call-to-action">Activer mon compte</button>
+
+        </form>
+
+
+    </div>
+
+</div>
+
+
+<app-loading *ngIf="isLoading" ></app-loading>

@@ -1,0 +1,62 @@
+<app-loading *ngIf="isLoading" ></app-loading>
+
+
+<div class="dashboard" *ngIf="!isLoading">
+
+    <div class="dashboard-left">
+
+        <div class="div-brand">
+            <img src="./assets/wnz.png" alt="" class="brand">
+        </div>
+
+        <p class="item" [routerLink]="['/dashboard/tableau-bord']" routerLinkActive="is-active">
+            <span class="material-icons">
+                dashboard
+            </span>
+            <span>Tableau de bord</span>
+        </p>
+
+        <p class="item" [routerLink]="['/dashboard/articles']" routerLinkActive="is-active">
+            <span class="material-icons">
+                category
+            </span>
+            <span>Articles</span>
+        </p>
+
+        <p class="item">
+            <span class="material-icons">
+                admin_panel_settings
+            </span>
+            <span>Apparence</span>
+        </p>
+
+        <p class="item">
+            <span class="material-icons">
+                settings
+            </span>
+            <span>Parametres</span>
+        </p>
+
+        <p class="item">
+            <span class="material-icons">
+                settings_suggest
+            </span>
+            <span>Boîte aux suggestions</span>
+        </p>
+
+    </div>
+
+
+    <div class="dashboard-right">
+
+        <div class="container">
+
+
+            <router-outlet></router-outlet>
+
+        </div>
+
+    </div>
+
+
+</div>

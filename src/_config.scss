@@ -1,0 +1,23 @@
+@import 'https://fonts.googleapis.com/css2?family=Montserrat&display=swap';
+
+$font-family : 'Montserrat', sans-serif;
+$green : #1DB954;
+.call-to-action{
+    border: none;
+    background-color: black;
+    color: white;
+    padding: 1em 5em;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 2em;
+    font-family: $font-family;
+}
+.form-control{
+    width: 30%;
+    border: none;
+    outline: 1px solid black;
+    height: 2.5em;
+    margin-left: 1em;
+    border-radius: 4px;
+    padding: 0 1em;
+}

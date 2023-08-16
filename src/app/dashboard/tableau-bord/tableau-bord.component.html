@@ -1,0 +1,227 @@
+<div class="body">
+
+    <div class="header">
+        <h3 class="left">Tableau de bord</h3>
+
+        <div class="right">
+            <b>{{data.name}}</b>
+            <img src="https://ui-avatars.com/api/?name={{data.name}}&rounded=true&background=random&bold=true" alt="">
+        </div>
+    </div>
+
+    <div class="content">
+
+        <div class="content-left">
+
+            <div class="images" >
+
+                <input type="file" #couverture (change)="changeImage('couverture')" accept="image/*" name="couv" hidden>
+                <input type="file" #profil (change)="changeImage('profil')" accept="image/*" name="profil" hidden>
+                <img [src]="imgHolder" (click)="openFile('couverture')"  alt="" class="couverture">
+
+                <img [src]="imgHolder1" (click)="openFile('profil')"  alt="" class="profil">
+            </div>
+
+            <h3 class="commande">Commande en attente</h3>
+
+
+            <div class="grid">
+
+                <div class="card">
+
+                    <div class="card-img">
+                        <img src="https://ui-avatars.com/api/?name=X-uT~nVZl1_0Dz513&background=random&bold=true" alt="">
+                    </div>
+
+                    <div class="card-body">
+                        <p>ARTICLES : <b>7</b></p>
+                        <p>COMMANDE: <b>X-uT~nVZl1_0Dz513</b></p>
+                        <p>Date de livraison prévu : <b>15/08/2023</b></p>
+                        <button (click)="openDialog()" class="call-to-action">Consulter</button>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- <div class="cards">
+
+                <div class="item">
+                    <img src="https://img.tvc-mall.com/uploads/details/660136424A-7.jpg" alt="">
+                    <p>Nom : <b>Pochette</b></p>
+                    <p>Quantité : <b>1</b></p>
+                    <p>Date de la commande : <b>09/08/2023</b></p>
+                    <p>Date de livraison prévu : <b>15/08/2023</b></p>
+                    <p>
+                        <span>Emballer</span>
+                        <select class="form-control" name="" id="">
+                            <option value="">NON</option>
+                            <option value="">OUI</option>
+                        </select>
+                    </p>
+                    <p>
+                        <span>Envoyer</span>
+                        <select class="form-control" name="" id="">
+                            <option value="">NON</option>
+                            <option value="">OUI</option>
+                        </select>
+                    </p>
+                    <p>Receptionner : <b>?</b></p>
+
+                    <div class="flex-button">
+                        <button class="call-to-action">
+                            Annuler
+                        </button>
+
+                        <button class="call-to-action">
+                            Cloturer
+                        </button>
+
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="https://img.tvc-mall.com/uploads/details/660136424A-7.jpg" alt="">
+                    <p>Nom : <b>Pochette</b></p>
+                    <p>Quantité : <b>1</b></p>
+                    <p>Date de la commande : <b>09/08/2023</b></p>
+                    <p>Date de livraison prévu : <b>15/08/2023</b></p>
+                    <p>
+                        <span>Emballer</span>
+                        <select class="form-control" name="" id="">
+                            <option value="">NON</option>
+                            <option value="">OUI</option>
+                        </select>
+                    </p>
+                    <p>
+                        <span>Envoyer</span>
+                        <select class="form-control" name="" id="">
+                            <option value="">NON</option>
+                            <option value="">OUI</option>
+                        </select>
+                    </p>
+                    <p>Receptionner : <b>?</b></p>
+
+                    <div class="flex-button">
+                        <button class="call-to-action">
+                            Annuler
+                        </button>
+
+                        <button class="call-to-action">
+                            Cloturer
+                        </button>
+
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="https://img.tvc-mall.com/uploads/details/660136424A-7.jpg" alt="">
+                    <p>Nom : <b>Pochette</b></p>
+                    <p>Quantité : <b>1</b></p>
+                    <p>Date de la commande : <b>09/08/2023</b></p>
+                    <p>Date de livraison prévu : <b>15/08/2023</b></p>
+                    <p>
+                        <span>Emballer</span>
+                        <select class="form-control" name="" id="">
+                            <option value="">NON</option>
+                            <option value="">OUI</option>
+                        </select>
+                    </p>
+                    <p>
+                        <span>Envoyer</span>
+                        <select class="form-control" name="" id="">
+                            <option value="">NON</option>
+                            <option value="">OUI</option>
+                        </select>
+                    </p>
+                    <p>Receptionner : <b>?</b></p>
+
+                    <div class="flex-button">
+                        <button class="call-to-action">
+                            Annuler
+                        </button>
+
+                        <button class="call-to-action">
+                            Cloturer
+                        </button>
+
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="https://img.tvc-mall.com/uploads/details/660136424A-7.jpg" alt="">
+                    <p>Nom : <b>Pochette</b></p>
+                    <p>Quantité : <b>1</b></p>
+                    <p>Date de la commande : <b>09/08/2023</b></p>
+                    <p>Date de livraison prévu : <b>15/08/2023</b></p>
+                    <p>
+                        <span>Emballer</span>
+                        <select class="form-control" name="" id="">
+                            <option value="">NON</option>
+                            <option value="">OUI</option>
+                        </select>
+                    </p>
+                    <p>
+                        <span>Envoyer</span>
+                        <select class="form-control" name="" id="">
+                            <option value="">NON</option>
+                            <option value="">OUI</option>
+                        </select>
+                    </p>
+                    <p>Receptionner : <b>?</b></p>
+
+                    <div class="flex-button">
+                        <button class="call-to-action">
+                            Annuler
+                        </button>
+
+                        <button class="call-to-action">
+                            Cloturer
+                        </button>
+
+                    </div>
+                </div>
+
+
+            </div> -->
+
+
+
+
+        </div>
+
+
+        <div class="content-right">
+
+            <div class="created">
+                <p>Date d'adhésion</p>
+                <p>{{convertDate(data.date_created)}}</p>
+            </div>
+            <div class="created">
+                <p>Téléphone N°</p>
+                <p>{{data.phone}}</p>
+            </div>
+            <div class="created">
+                <p>Secteur d'activité</p>
+                <p>{{data.categorie}}</p>
+            </div>
+
+            <div class="created">
+                <p>{{data.categorie}} N°</p>
+                <p>{{data.boutiqueId}}</p>
+            </div>
+
+            <div class="created">
+                <p>Numéro unique</p>
+                <p>{{data.userId}}</p>
+            </div>
+
+            <div class="created">
+                <p>IDENTIFIANT</p>
+                <p>{{data.slugId}}</p>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</div>

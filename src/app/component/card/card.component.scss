@@ -1,0 +1,69 @@
+@import '../../../config';
+
+.body, *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(4, 24%);
+    gap: 1.5em;
+    box-sizing: border-box;
+
+    .card{
+        box-sizing: border-box;
+        width: 100%;
+        background-color: #f2f2f2;
+        border-radius: 4px;
+        padding: 1em;
+        box-sizing: border-box;
+        position: relative;
+        // height: 14.5em;
+        .card-img{
+            width: 100%;
+            height: 7em;
+            background-color: #fff;
+            img{
+                height: inherit;
+                width: inherit;
+                object-fit: cover;
+            }
+        }
+        span{
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 15%;
+            right: 3%;
+            z-index: 999;
+            background: #f2f2f2;
+            border-radius: 50%;
+            padding: .05em;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+
+
+        .card-body{
+            text-align: center;
+            p{
+                text-align: left;
+                display: flex;
+                justify-content: space-between;
+                b{
+                    color: $green;
+                    font-weight: bold;
+                    font-size: 1.2em;
+                }
+            }
+            .call-to-action{
+                margin-top: 0;
+                background-color: red;
+
+            }
+        }
+    }
+}

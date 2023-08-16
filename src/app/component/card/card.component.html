@@ -1,0 +1,28 @@
+<div class="grid">
+
+    <div class="card">
+
+        <span class="material-icons" mat-button [matMenuTriggerFor]="menu">
+            more_vert
+        </span>
+
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+                <mat-icon>close</mat-icon>
+                <span>Supprimer le tous</span>
+            </button>
+        </mat-menu>
+
+        <div class="card-img">
+            <img src="https://ui-avatars.com/api/?name=X-uT~nVZl1_0Dz513&background=random&bold=true" alt="">
+        </div>
+
+        <div class="card-body">
+            <p>Nom: <b>Pochette</b></p>
+            <p>ARTICLES : <b>4 / 7</b></p>
+            <p>Date d'ajout : <b>08/08/2023</b></p>
+            <button class="call-to-action">Supprimer <b>1</b> article</button>
+        </div>
+
+    </div>
+</div>
