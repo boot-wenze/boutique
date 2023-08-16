@@ -1,4 +1,4 @@
-pipeline {
+peline {
     
     agent any
     
@@ -14,7 +14,7 @@ pipeline {
         stage("Create Docker Image"){
             
             steps{
-                pwsh "docker build -t iamtheblur14/boutique:v1.0.0 ."
+                bat "docker build -t iamtheblur14/boutique:v1.0.0 ."
             }
             
         }
