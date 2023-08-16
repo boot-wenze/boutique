@@ -14,7 +14,7 @@ pipeline {
         stage("Create Docker Image"){
             
             steps{
-                sh "docker build -t iamtheblur14/boutique:v1.0.0 ."
+                bash "docker build -t iamtheblur14/boutique:v1.0.0 ."
             }
             
         }
