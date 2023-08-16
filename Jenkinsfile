@@ -14,7 +14,7 @@ pipeline {
         stage("Create Docker Image"){
             
             steps{
-                echo "docker build -t iamtheblur14/boutique:v1.0.0 ."
+                docker build -t iamtheblur14/boutique:v1.0.0 .
             }
             
         }
