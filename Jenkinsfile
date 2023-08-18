@@ -13,7 +13,7 @@ pipeline {
         
         stage('SonarQube Analysis') {
           steps{
-            withSonarQubeEnv("scanner") {
+            withSonarQubeEnv("sonarqube") {
               bat "npm run sonar"
             }
           }  
