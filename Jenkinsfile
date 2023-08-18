@@ -11,6 +11,15 @@ pipeline {
             }
         }
         
+        stage("SonarQube Analysis"){
+            
+            steps{
+                withSonarQubeEnv("scanner"){
+                  bat "mvn sonar:sonar"
+                }
+            }
+            
+        }
         stage("Create Docker Image"){
             
             steps{
