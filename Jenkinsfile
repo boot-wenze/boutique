@@ -12,10 +12,11 @@ pipeline {
         }
         
         stage('SonarQube Analysis') {
-          
-          withSonarQubeEnv("scanner") {
-            bat "npm run sonar"
-          }
+          steps{
+            withSonarQubeEnv("scanner") {
+              bat "npm run sonar"
+            }
+          }  
         }
         stage("Create Docker Image"){
             
