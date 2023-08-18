@@ -15,7 +15,7 @@ pipeline {
             
             steps{
                 withSonarQubeEnv("scanner"){
-                  bat "mvn sonar:sonar"
+                  bat "npm run sonar"
                 }
             }
             
