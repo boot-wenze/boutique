@@ -1,0 +1,191 @@
+@import "../../../../config";
+
+*{
+    box-sizing: border-box;
+}
+.empty{
+    text-align: center;
+    font-weight: 900;
+    font-size: 70px;
+    margin: 4em auto;
+    text-transform: uppercase;
+    color: gray;
+}
+.container{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1em;
+    height: inherit;
+
+    &-item, &-edit{
+        background: white;
+        border-radius: 20px;
+        height: inherit;
+        overflow-y: scroll;
+    }
+    &-item{
+        width: 75%;
+
+        .sticky{
+            padding: 2em;
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            background: inherit;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f2f2f2;
+            p{
+                font-size: 18px;
+                font-weight: bold;
+            }
+            .btn{
+                background: black;
+                padding: 10px 2em;
+                color: white;
+                border-radius: 8px;
+            }
+        }
+
+        .item{
+            padding: 2em;
+            .title{
+                font-weight: bold;
+                font-size: 17px;
+            }
+
+            .cadre{
+                border: 1px solid #f2f2f2;
+                border-radius: 8px;
+                padding: 10px;
+                width: 50%;
+                margin-bottom: 1.5em;
+
+                .same-price{
+                    margin-bottom: 1em;
+                    input{
+                        accent-color: black;
+                    }
+                    span{
+                        margin-left: .5em;
+                    }
+                }
+
+                textarea{
+                    width: 100%;
+                    min-height: 200px;
+                    max-height: 500px;
+                    border-radius: 8px;
+                    border: 1px solid black;
+                    padding: 10px;
+                    &:focus{
+                        outline: none;
+                        border: 1px solid black;
+                    }
+                }
+            }
+
+            .form-group{
+                p{
+                    margin-bottom: 0;
+                    color: gray;
+                    font-weight: bold;
+                }
+                .form-control{
+                    margin: 1em 0;
+                    width: 100%;
+                }
+            }
+
+            .pictures{
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                img{
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 8px;
+                    border: 1px solid #f2f2f2;
+                    background-size: 100% 100%;
+                    cursor: pointer;
+                }
+            }
+        }
+
+
+    }
+    &-edit{
+        width: 25%;
+        padding: 2em;
+        .title, .description, .detail-header{
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 1.5em;
+        }
+
+        .images{
+            display: flex;
+            gap: 1em;
+            .initial{
+                width: 80%;
+                height: 15em;
+                border-radius: 20px;
+                border: 1px solid #f2f2f2;
+            }
+            .slider{
+                width: 20%;
+                display: block;
+                img{
+                    cursor: pointer;
+                    height: 50px;
+                    width: 100%;
+                    background-size: 100% 100%;
+                    border-radius: 8px;
+                }
+                .active-photo{
+                    border: 2px solid $green;
+                    filter: grayscale(80%)
+                }
+            }
+        }
+        .description{
+            margin: 1.5em auto;
+        }
+        .detail-header{
+            margin: 1.5em auto;
+        }
+
+        .modify, .delete{
+            text-align: center;
+            width: 100%;
+            margin: 2em auto;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .delete{
+            background: lighten(red, 30);
+            color: red;
+        }
+        .modify{
+            background-color: black;
+            color: white;
+        }
+        .nom{
+            font-weight: bold;
+            margin-bottom: 1.5em;
+        }
+        .detail{
+            color: gray;
+        }
+        .price{
+            span{
+                font-weight: bold;
+            }
+        }
+
+    }
+}

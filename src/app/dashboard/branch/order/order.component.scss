@@ -1,0 +1,179 @@
+@import "../../../../config";
+
+*{
+    box-sizing: border-box;
+}
+.content{
+    background: white;
+}
+
+.container{
+    // width: 80%;
+    padding: 2em;
+    margin: auto;
+
+
+    .header{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1em;
+        margin: auto;
+
+        .form{
+            padding: 10px;
+            width: 70%;
+            background: #ddd;
+            height: 2.5em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 8px;
+
+            input{
+                background: #ddd;
+                height: inherit;
+                width: 90%;
+                border: none;
+                outline: none;
+            }
+        }
+
+        .calender{
+            position: relative;
+            background: black;
+            border-radius: 8px;
+            padding: 1px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            box-sizing: border-box;
+
+            .mat-date-range-input{
+                position: absolute;
+                transform: translate(-50%, -50%);
+                top: 25%;
+                right: 5%;
+                line-height: 0;
+                padding: 0;
+                margin: 0;
+                input{
+                    display: none;
+                }
+            }
+            .date{
+                margin: 0;
+                text-transform: capitalize;
+            }
+        }
+    }
+
+    .commande-header{
+        display: flex;
+        justify-items: flex-start;
+        align-items: flex-end;
+        margin: 5em auto 3em auto;
+        gap: 1em;
+        font-weight: bold;
+        color: gray;
+        .item{
+            margin-right: 1em;
+            cursor: pointer;
+        }
+        .active{
+            position: relative;
+            color: $green;
+            &::after{
+                display: block;
+                content: " ";
+                width: 100%;
+                height: 2px;
+                background: $green;
+                position: absolute;
+                transform: translate(-50%, -50%);
+                left: 50%;
+                bottom: -45%;
+            }
+        }
+    }
+
+    .empty{
+        text-align: center;
+        font-weight: 900;
+        font-size: 70px;
+        margin: 4em auto;
+        text-transform: uppercase;
+        color: gray;
+    }
+
+    table{
+        border-collapse: collapse;
+        width: 100%;
+
+        // & tr:nth-child(even){
+        //     background-color: #f2f2f2;
+        // }
+
+        & tr:hover {
+            background-color: #ddd;
+        }
+
+        & th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            color: black;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        tr{
+            td.produit{
+                display: flex;
+                place-items: center;
+                gap: .5em;
+                img{
+                    cursor: pointer;
+                    height: 40px;
+                    width: 40px;
+                }
+            }
+        }
+
+        .pending{
+            background: lighten(orange, 40);
+            border-radius: 20px;
+            padding: 10px 15px;
+            color: orange;
+            font-weight: bold;
+        }
+        .complet{
+            background: lighten($green, 43);
+            border-radius: 20px;
+            padding: 10px 15px;
+            color: $green;
+            font-weight: bold;
+        }
+        .priority{
+            color: $green;
+            font-weight: bold;
+        }
+        .not-priority{
+            color: black;
+            font-weight: bold;
+        }
+        .annuler{
+            background: lighten(red, 43);
+            border-radius: 20px;
+            padding: 10px 15px;
+            color: red;
+            font-weight: bold;
+        }
+        span{
+            font-size: 12px;
+        }
+    }
+}

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  rootUri: 'http://127.0.0.1:8000/',
+  rootUri: 'http://127.0.0.1:8000/api/',
   version: 'dev',
 
 };

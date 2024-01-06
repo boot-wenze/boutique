@@ -1,0 +1,128 @@
+<div class="content">
+
+
+    <div class="container">
+
+
+        <div class="header">
+
+            <div class="form">
+                <input type="text" [(ngModel)]="product" (ngModelChange)="searchOrder(product)" name="search" id="search" placeholder="Rechercher une commande">
+                <span class="material-symbols-rounded">
+                    search
+                </span>
+            </div>
+
+            <div class="calender">
+
+                <p class="date">
+                    {{ getMonthDay(dateDebut) }}
+                     -
+                    {{ getMonthDay(dateFin) }}
+                     ,
+                    {{ getYear(dateFin) }}
+                </p>
+
+                <div class="form-date">
+                    <mat-date-range-input [rangePicker]="picker" >
+                        <input matStartDate [(ngModel)]="dateDebut">
+                        <input matEndDate [(ngModel)]="dateFin" (ngModelChange)="dateFilter()">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="commande-header">
+            <div
+                class="item"
+                (click)="filterOrder(categorie)"
+                [ngClass]="{'active' : categorie === category }"
+                *ngFor="let categorie of categories"
+            >
+                {{ categorie }}
+            </div>
+        </div>
+
+        <div class="table">
+
+            <p class="empty" *ngIf="!datasource.length">AUCUNE COMMANDE</p>
+
+            <table *ngIf="datasource.length">
+                <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            N° Commande
+                        </th>
+                        <th>
+                            Produit
+                        </th>
+                        <th>
+                            Date commande
+                        </th>
+                        <th>
+                            Type de commande
+                        </th>
+                        <th>
+                            Prix
+                        </th>
+                        <th>
+                            Date de livraison prévue
+                        </th>
+                        <th>
+                            Statut
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of datasource">
+                        <td>{{ data.id }}</td>
+                        <td>{{ data.orderId }}</td>
+                        <td class="produit">
+                            <img
+                                [src]="data.photo"
+                                [alt]="data.name"
+                            >
+                            <p>
+                                {{ data.name }}
+                            </p>
+                        </td>
+                        <td>{{data.orderDate}}</td>
+                        <td [ngClass]="{'priority': data.orderType === 'Priorité', 'not-priority': data.orderType !== 'Priorité'}" >{{ data.orderType }}</td>
+                        <td>{{ data.currency }} {{ data.price }}</td>
+                        <td>{{ data.deliveringDate }}</td>
+                        <td>
+                            <span
+                                [ngClass]="{
+                                    'pending' : data.status === 'En attente',
+                                    'complet': data.status === 'Complet',
+                                    'annuler' : data.status === 'Annuler'
+                                }"
+                            >
+                                {{ data.status }}
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+
+
+
+    </div>
+
+
+
+
+
+
+</div>

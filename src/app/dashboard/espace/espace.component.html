@@ -1,0 +1,202 @@
+
+<div class="body">
+
+
+    <div class="container">
+
+        <p class="logo">{{data.bness.name}}</p>
+
+        <!-- <p class="branch">Branche(s)</p> -->
+
+
+        <div class="branchs">
+
+            <div class="item"
+                [routerLink]="['/dashboard/branch']"
+                [queryParams]="{
+                    id: branch.managed_by,
+                    emplacement: branch.quartier,
+                    avenue: branch.address.avenue,
+                    n_: branch.address.numero,
+                }"
+                *ngFor="let branch of data.branch"
+            >
+
+                <p class="quartier">
+                    {{ branch.quartier }}
+                </p>
+
+                <p class="phone">
+                    {{ branch.phone }}
+                </p>
+
+                <div class="d-flex">
+                    <div class="img">
+                        <img src="https://ui-avatars.com/api/?background=random&name={{branch.managed_by === data.user.user_id ? data.user.first_name : branch.managed_by}}" alt="">
+                        <p class="managed-by">
+                            {{
+                                branch.managed_by === data.user.user_id ?
+                                data.user.first_name : branch.managed_by
+                            }}
+                        </p>
+                    </div>
+                    <span *ngIf="branch.is_headquarter" class="material-symbols-rounded">
+                        home
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="item">
+
+                <p class="quartier">
+                    Pétro-congo
+                </p>
+
+                <p class="phone">
+                    01324253663
+                </p>
+
+                <div class="d-flex">
+                    <div class="img">
+                        <img src="https://ui-avatars.com/api/name=blur" alt="">
+                        <p class="managed-by">
+                            blur
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="item">
+
+                <p class="quartier">
+                    Lingwala
+                </p>
+
+                <p class="phone">
+                    092852905285
+                </p>
+
+                <div class="d-flex">
+                    <div class="img">
+                        <img src="https://ui-avatars.com/api/name=unk" alt="">
+                        <p class="managed-by">
+                            UNK
+                        </p>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="item">
+
+                <p class="quartier">
+                    GOMBE
+                </p>
+
+                <p class="phone">
+                    064742562552
+                </p>
+
+                <div class="d-flex">
+                    <div class="img">
+                        <img src="https://ui-avatars.com/api/name=gb" alt="">
+                        <p class="managed-by">
+                            GB
+                        </p>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="item">
+
+                <p class="quartier">
+                    GOMA
+                </p>
+
+                <p class="phone">
+                    082586494204
+                </p>
+
+                <div class="d-flex">
+                    <div class="img">
+                        <img src="https://ui-avatars.com/api/name=idr" alt="">
+                        <p class="managed-by">
+                            idriss
+                        </p>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="item">
+
+                <p class="quartier">
+                    Lubumbashi
+                </p>
+
+                <p class="phone">
+                    09563368385
+                </p>
+
+                <div class="d-flex">
+                    <div class="img">
+                        <img src="https://ui-avatars.com/api/name=lushi" alt="">
+                        <p class="managed-by">
+                            DJOGO
+                        </p>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="item">
+
+                <p class="quartier">
+                    matete
+                </p>
+
+                <p class="phone">
+                    08569539638
+                </p>
+
+                <div class="d-flex">
+                    <div class="img">
+                        <img src="https://ui-avatars.com/api/name=k l" alt="">
+                        <p class="managed-by">
+                            kuuna
+                        </p>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div *ngIf="data.permission.type == 'ADMIN'" class="add">
+                <span class="material-symbols-outlined">
+                    add
+                </span>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+<router-outlet></router-outlet>

@@ -1,0 +1,160 @@
+<div class="content">
+
+    <div class="container">
+
+        <div class="container-item">
+
+            <div class="sticky">
+
+                <div class="header">
+                    <p class="title">
+                        Produits
+                    </p>
+
+                    <div class="search-product">
+
+                        <div class="form">
+                            <span class="material-symbols-rounded">
+                                search
+                            </span>
+                            <input type="text" name="search" id="search" [(ngModel)]="search" (ngModelChange)="searchOrder()" placeholder="Rechercher un produit">
+                        </div>
+
+                        <div
+                            class="add-product"
+                            [routerLink]="['/dashboard/branch/product/add-product']"
+                            [queryParams]="{
+                                id: link.managed_by,
+                                emplacement: link.quartier,
+                                avenue: link.address.avenue,
+                                n_: link.address.numero,
+                            }"
+                        >
+                            <p>Ajouter un produit</p>
+                            <p class="material-symbols-rounded">
+                                add
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="categorie">
+                    <div
+                        class="item"
+                        (click)="filterProduct(category)"
+                        *ngFor="let category of categorie"
+                        [ngClass]="
+                            {'active': category === active}
+                        "
+                    >
+                        {{ category }}
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="products">
+
+                <div
+                    class="item"
+                    *ngFor="let item of data"
+                    (click)="editProduct(item.id)"
+                    [ngClass]="{'active-product': item.id === activeProduct}"
+                >
+                    <img [src]="item.photos[0]" [alt]="item.name">
+                    <div class="item-content">
+                        <p class="title">
+                            {{ item.name | slice : 0 : 25 }}
+                        </p>
+                        <p class="price">
+                            {{ item.currency }}
+                            {{ item.price }}
+                        </p>
+                        <div class="stock">
+                            <p>
+                                Stock <span>{{ item.stock }}</span>
+                            </p>
+                            <p>
+                                Vendu <span>{{ item.sold }}</span>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <p *ngIf="!data.length" class="empty">
+                AUCUN PRODUIT TROUVé
+            </p>
+
+
+        </div>
+
+        <div class="container-edit">
+
+            <p class="title">
+                Modifier le produit
+            </p>
+
+            <div class="images">
+                <img [src]="myImage" alt="" class="initial">
+                <div class="slider">
+                    <img [src]="photo" [ngClass]="{'active-photo': activeImage === photo }" (click)="changeImage(photo)"  *ngFor="let photo of product.photos" alt="" class="slide-photo">
+                </div>
+            </div>
+
+            <p class="description">
+                Description
+            </p>
+
+            <div class="edit-body">
+
+                <p class="holder">Nom du produit</p>
+
+                <p class="nom">{{ product.name }}</p>
+
+                <p class="holder">Description</p>
+
+                <p class="detail">
+                    {{ product.description }}
+                </p>
+
+                <p class="detail-header">
+                    Détail
+                </p>
+
+                <p class="price">
+                    Prix: <span>{{ product.currency }} {{ product.price }}</span>
+                </p>
+                <p class="price">
+                    Stock: <span>{{ product.stock }}</span>
+                </p>
+                <p class="price">
+                    Vendu: <span>{{ product.sold }}</span>
+                </p>
+
+                <div class="delete" *ngIf="user.permission.can_delete">
+                    Supprimer
+                </div>
+                <div class="modify" *ngIf="user.permission.can_modify">
+                    Modifier
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+</div>

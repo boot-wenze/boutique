@@ -7,7 +7,21 @@
     font-family: $font-family;
 }
 
+h3{
+    text-align: left;
+    margin: 2em 0;
+}
 
+input[type="checkbox"]{
+    margin-right: .7em;
+    height: 17px;
+    width: 17px;
+    accent-color: $green;
+}
+
+button{
+    margin-bottom: 2.5em;
+}
 .container{
     width: 50%;
     margin: 2em auto;
@@ -21,7 +35,7 @@
     .form-group{
         width: 100%;
         text-align: left;
-        margin: 1em;
+        margin: 1em 0;
         b{
             color: $green;
         }
@@ -33,6 +47,7 @@
             outline: 1px solid black;
             border-radius: 4px;
             margin-top: .5em;
+            margin-left: 0;
             padding: 0 15px;
             box-sizing: border-box;
             cursor: pointer;

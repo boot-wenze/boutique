@@ -16,6 +16,7 @@ export class HomeComponent {
   connect = false
 
   isLoading = false
+  isLocalStorage = false
 
   identifiant : string = ''
   password: string = ''
@@ -23,14 +24,17 @@ export class HomeComponent {
   constructor(
     private api: ApiService,
     private securestorage: SecureStorageService,
-    private router : Router
+    private router: Router
   ){}
 
   ngOnInit() {
 
     this.isLoading = true
 
-    setTimeout(() => this.isLoading = false, 2000)
+    setTimeout(() => this.isLoading = false, 4000)
+
+    this.isLocalStorage = this.securestorage.hasOwnProperty('OAuthBT')
+    // console.log(this.isLocalStorage);
 
     // this.api._get('boutiqueDemande')
     // .subscribe((res : any)=> console.log(res))
@@ -55,15 +59,15 @@ export class HomeComponent {
 
   submit() {
     const data = {
-      _identifiant : this.identifiant,
-      _password : this.password
+      identifiant : this.identifiant,
+      password : this.password
     }
 
-    this.api._post('boutique_connexion', data)
+    this.api._post('connexion', data)
     .subscribe((res: any) => {
       // console.log(res);
       if (res.succeed) {
-        this.securestorage.setItem('OAuthBT', res.data)
+        this.securestorage.setItem('OAuthBT', JSON.stringify(res.data))
         this.router.navigate(['dashboard'])
       } else {
         Swal.fire({

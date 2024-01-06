@@ -10,7 +10,7 @@
         <div class="navbar-items">
 
 
-            <div (click)="loginForm()" class="login navbar-item">
+            <div *ngIf="!isLocalStorage" (click)="loginForm()" class="login navbar-item">
 
                 <span class="material-icons">
                     person
@@ -20,10 +20,16 @@
                 </span> -->
             </div>
 
-            <div [routerLink]="['/commencer']" class="navbar-item">
+            <div *ngIf="!isLocalStorage" [routerLink]="['/commencer']" class="navbar-item">
                 <span>Commencer</span>
                 <span class="material-icons">
                     expand_more
+                </span>
+            </div>
+            <div *ngIf="isLocalStorage" [routerLink]="['/dashboard']" class="navbar-item">
+                <span>Mon espace</span>
+                <span class="material-icons">
+                    person
                 </span>
             </div>
 
@@ -40,22 +46,15 @@
 
     <div class="showcase">
 
-        <video id="video" autoplay loop muted>
-            <source src="./assets/wnz.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-
-        <div class="gradient-overlay"></div>
-
         <div class="boutique">
             <h1>
-                Créez votre boutique en quelques étapes simples
+                Créez votre espace business en quelques étapes, simples
                 et rejoignez notre communauté prospère. <br>
                 Votre aventure avec nous commence ici.
             </h1>
 
             <p class="slogan">
-                Accéder à votre boutique, ajouter, modifier et supprimer des articles, ainsi que gérer tous les aspects de votre boutique en toute simplicité.
+                Accéder à votre espace, ajouter, modifier et supprimer des articles, ainsi que gérer tous les aspects de votre espace en toute simplicité.
             </p>
 
             <div class="boutons">

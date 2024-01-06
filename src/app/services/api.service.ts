@@ -66,7 +66,4 @@ export class ApiService {
     return JSON.parse(this.securestorage.getItem('OAuthBT'))
   }
 
-  getDetails() {
-    return JSON.parse(this.securestorage.getItem('OAuthBDetails'))
-  }
 }

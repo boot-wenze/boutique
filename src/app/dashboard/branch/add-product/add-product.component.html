@@ -1,0 +1,146 @@
+<div class="content">
+
+    <div class="container">
+
+        <div class="container-item">
+
+            <div class="sticky">
+
+                <p>
+                    Ajouter un produit
+                </p>
+
+                <div class="btn">
+                    Publier
+                </div>
+
+            </div>
+
+            <div class="item">
+
+                <p class="title">
+                    Informations de base
+                </p>
+
+                <div class="cadre">
+
+                    <div class="form-group">
+                        <p >
+                            Titre
+                        </p>
+                        <input type="text" class="form-control">
+
+                    </div>
+
+                    <div class="form-group">
+                        <p >
+                            Catégorie
+                        </p>
+                        <select class="form-control" name="" id="">
+                            <option value="" disabled selected>catégorie</option>
+                            <option [value]="category" *ngFor="let category of categorie" >{{ category }}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <p>
+                            Description
+                        </p>
+                        <textarea name="" id="" cols="30" rows="10"></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <p class="title">
+                    Photos
+                </p>
+
+                <div class="cadre">
+
+                    <div class="pictures">
+                        <img [src]="pic1" alt="">
+                        <img [src]="pic2" alt="">
+                        <img [src]="pic3" alt="">
+                    </div>
+
+                </div>
+
+                <p class="title">
+                    Details
+                </p>
+
+                <div class="cadre">
+
+                    <div class="same-price">
+                        <input type="checkbox" name="" id="">
+                        <span>Ces articles ont-ils le même prix ?</span>
+                    </div>
+
+                    <div class="form-group">
+                        <p >
+                            Prix
+                        </p>
+                        <input type="number" class="form-control">
+
+                    </div>
+
+                    <div class="form-group">
+                        <p >
+                            Taille
+                        </p>
+                        <input type="text" class="form-control">
+
+                    </div>
+
+                    <div class="form-group">
+                        <p >
+                            Monnaie
+                        </p>
+                        <select class="form-control" name="" id="">
+                            <option value="" disabled selected>Monnaie</option>
+                            <option value="FC" >FC</option>
+                            <option value="USD" >USD</option>
+                        </select>
+                    </div>
+
+                    <div class="same-price">
+                        <input type="checkbox" name="" id="">
+                        <span>cet article a t-il une réduction ?</span>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="container-edit">
+            <p class="title">
+                Aperçu
+            </p>
+
+            <div class="images">
+                <img [src]="myImage" alt="" class="initial">
+                <div class="slider">
+                    <img [src]="photo" [ngClass]="{'active-photo': activeImage === photo }" *ngFor="let photo of photos" alt="" class="slide-photo">
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+</div>

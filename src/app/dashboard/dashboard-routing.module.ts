@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
+import { EspaceComponent } from './espace/espace.component';
 
 const routes: Routes = [
   {
@@ -9,17 +10,21 @@ const routes: Routes = [
     children: [
       {
         pathMatch: 'full',
-        redirectTo: 'tableau-bord',
+        redirectTo: 'espace',
         path : ''
       },
       {
-        path: 'tableau-bord',
-        loadChildren : ()=> import("./tableau-bord/tableau-bord.module").then(m => m.TableauBordModule)
+        path: 'espace',
+        component: EspaceComponent
       },
       {
-        path: 'articles',
-        loadChildren : ()=> import("./articles/articles.module").then(m => m.ArticlesModule)
+        path: 'branch',
+        loadChildren : ()=> import("./branch/branch.module").then(m => m.BranchModule)
       },
+      // {
+      //   path: 'articles',
+      //   loadChildren : ()=> import("./articles/articles.module").then(m => m.ArticlesModule)
+      // },
     ]
   }
 ];

@@ -12,10 +12,12 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build --prod
+CMD ["ng", "serve"]
+# RUN npm run build --prod
 
-FROM nginx:alpine
+# FROM nginx:alpine
 
-COPY --from=build /web-boutique/dist/boutique /usr/share/nginx/html
+# COPY --from=build /web-boutique/dist/boutique /usr/share/nginx/html
 
-EXPOSE 80
+# EXPOSE 80
+

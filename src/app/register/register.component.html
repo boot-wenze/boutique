@@ -14,51 +14,77 @@
             Les documents requis sont :
         </p>
         <ol>
-            <li>Preuve d'exploitation de la boutique</li>
-            <li>Conditions générales de ventes</li>
-            <li>RIB (Relevé d'Identité Bancaire)</li>
+            <li>Nom du business</li>
+            <li>Type de business</li>
+            <li>Enumérer les categories, e.g: Chaussures Costumes...</li>
+            <li>Immatriculation</li>
+            <li>E-mail</li>
+            <li>Télephone</li>
+            <!-- <li>Preuve d'exploitation de la boutique</li>
+            <li>Conditions générales de ventes</li> -->
         </ol>
-        <p>
+        <!-- <p>
             Les deux derniers documents ne sont pas obligatoires,
             mais leur inclusion pourrait accélérer le processus.
             <br>
             Votre coopération est essentielle
             pour mener à bien cette étape.
             Nous sommes à votre disposition pour toute assistance.
+        </p> -->
+        <p>
+            Après vérification, d'autres documents vous pourrez
+            être demandé pour validée votre espace.
         </p>
 
         <br> <br>
 
-        <div class="form-group">
-            <label for="">E-mail</label>
-            <input type="email" [(ngModel)]="email" class="form-control" placeholder="équipe@wenze.cd">
-        </div>
-        <br>
-        <div class="form-group">
-            <label for="">Télephone</label>
-            <input type="text" [(ngModel)]="phone" class="form-control" placeholder="O1********" maxlength="10" minlength="10">
-        </div>
-        <br>
-        <div class="file">
-            <label for="">Preuve d'exploitation de la boutique : </label>
-            <p class="televerser" (click)="openFile('exploitation')" >{{exploitationFile.length < 1 ? 'Téleverser votre document' : exploitationFile}}</p>
-            <input #exploitation (change)="fileElement($event,'exploitation')" type="file" name="" id="" hidden required>
-        </div>
-        <br>
-        <div class="file">
-            <label for="">Conditions générales de ventes : </label>
-            <p class="televerser" (click)="openFile('cgv')" >{{cgvFile.length < 1 ? 'Téleverser votre document' : cgvFile}}</p>
-            <input #cgv (change)="fileElement($event, 'cgv')" type="file" name="" id="" hidden>
-        </div>
-        <br>
-        <div class="file">
-            <label for="">RIB (Relevé d'Identité Bancaire) : </label>
-            <p class="televerser" (click)="openFile('rib')" >{{ribFile.length < 1 ? 'Téleverser votre document' : ribFile }}</p>
-            <input #rib (change)="fileElement($event, 'rib')" type="file" name="" id="" hidden>
-        </div>
+        <form ngNativeValidate (submit)="submitFiles()">
 
-        <br>
-        <button class="call-to-action" (click)="submitFiles()" >Soumettre</button>
+            <div class="form-group">
+                <input type="text" [(ngModel)]="name" name="name" id="name" class="form-control" placeholder="Nom du business" required>
+            </div>
+            <div class="form-group">
+                <select name="type" id="type" [(ngModel)]="type" required>
+                    <option value="" selected disabled>Type</option>
+                    <option value="SUPERMARCHE" >Super marché</option>
+                    <option value="WENZE" >Wenze</option>
+                    <option value="BOUTIQUE" >Boutique</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="text" id="category" name="category" [(ngModel)]="category" class="form-control" placeholder="Catégorie" required maxlength="255">
+                <p class="info">e.g: Chaussure Veste Pantalon Chemise Sandale</p>
+            </div>
+            <div class="form-group">
+                <input type="text" id="imma" name="immatriculation" [(ngModel)]="immatriculation" class="form-control" placeholder="Immatriculation" required>
+            </div>
+            <div class="form-group">
+                <input type="email" id="email" name="email" [(ngModel)]="email" class="form-control" placeholder="E-mail" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="phone" name="phone" [(ngModel)]="phone" class="form-control" placeholder="Télephone" maxlength="10" minlength="10" required>
+            </div>
+            <!-- <div class="file">
+                <label for="">Preuve d'exploitation de la boutique : </label>
+                <p class="televerser" (click)="openFile('exploitation')" >{{exploitationFile.length < 1 ? 'Téleverser votre document' : exploitationFile}}</p>
+                <input #exploitation (change)="fileElement($event,'exploitation')" type="file" name="" id="" hidden required>
+            </div>
+            <br>
+            <div class="file">
+                <label for="">Conditions générales de ventes : </label>
+                <p class="televerser" (click)="openFile('cgv')" >{{cgvFile.length < 1 ? 'Téleverser votre document' : cgvFile}}</p>
+                <input #cgv (change)="fileElement($event, 'cgv')" type="file" name="" id="" hidden>
+            </div>
+            <br>
+            <div class="file">
+                <label for="">RIB (Relevé d'Identité Bancaire) : </label>
+                <p class="televerser" (click)="openFile('rib')" >{{ribFile.length < 1 ? 'Téleverser votre document' : ribFile }}</p>
+                <input #rib (change)="fileElement($event, 'rib')" type="file" name="" id="" hidden>
+            </div> -->
+            <button type="submit" class="call-to-action" >Soumettre</button>
+
+        </form>
+
 
     </div>
 

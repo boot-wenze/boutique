@@ -1,0 +1,79 @@
+<div class="body">
+
+    <div class="nav">
+
+        <div class="img-logo">
+            <img src="./assets/wnz.png" alt="">
+            <p>WENZE  <span>{{data.quartier}}</span> </p>
+        </div>
+
+
+        <div class="items">
+
+            <div
+                [routerLink]="['/dashboard/branch/order']"
+                class="nav-item"
+                routerLinkActive="active"
+                [queryParams]="{
+                    id: data.managed_by,
+                    emplacement: data.quartier,
+                    avenue: data.address.avenue,
+                    n_: data.address.numero,
+                }"
+            >
+                <span class="material-symbols-rounded">
+                    shopping_cart
+                </span>
+                <span>Commande</span>
+            </div>
+
+            <div
+                [routerLink]="['/dashboard/branch/product']"
+                routerLinkActive="active"
+                class="nav-item"
+                [queryParams]="{
+                    id: data.managed_by,
+                    emplacement: data.quartier,
+                    avenue: data.address.avenue,
+                    n_: data.address.numero,
+                }"
+
+            >
+                <span class="material-symbols-rounded">
+                    inventory_2
+                </span>
+                <span>Produits</span>
+            </div>
+
+            <div class="nav-item">
+                <span class="material-symbols-rounded">
+                    productivity
+                </span>
+                <span>Clients</span>
+            </div>
+
+            <div class="nav-item">
+                <span class="material-symbols-rounded">
+                    settings
+                </span>
+                <span>Réglages</span>
+            </div>
+
+            <div class="logo">
+                <img src="https://ui-avatars.com/api/?name={{user.first_name}} {{user.last_name}}" alt="" class="img">
+                <p class="title">{{user.username}}</p>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
+
+
+</div>
+

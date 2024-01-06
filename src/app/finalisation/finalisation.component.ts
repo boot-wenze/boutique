@@ -4,7 +4,6 @@ import { ApiService } from '../services/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
-
 @Component({
   selector: 'app-finalisation',
   templateUrl: './finalisation.component.html',
@@ -17,11 +16,25 @@ export class FinalisationComponent {
   isLoading = false
   swal !: boolean
 
-  activity: string = ''
-  nom : string = ''
-  mdp : string = ''
+
   cfn: string = ''
   disabled = true
+
+  first_name: string = ""
+  last_name: string = ""
+  surname: string = ""
+  permission: string = "ADMIN"
+  password: string = ""
+  email: string = ""
+
+  phone: string = ""
+  mail: string = ""
+  city: string = ""
+  commune: string = ""
+  quartier: string = ""
+  numero!: number
+  avenue: string = ""
+  is_headquarter: boolean = false
 
   constructor(
     private api: ApiService,
@@ -34,13 +47,13 @@ export class FinalisationComponent {
 
     this.isLoading = true
 
-    if (Object.keys(this._params.snapshot.queryParams).length < 2) {
+    if (Object.keys(this._params.snapshot.queryParams).length !== 2) {
       this.isLoading = false
       this.swal = true
 
       Swal.fire({
         icon: 'error',
-        text : 'Pas non trouvée'
+        text : 'Page non trouvée'
       }).then(result => {
         if(result.isConfirmed)
         this.router.navigate(['/'])
@@ -48,9 +61,9 @@ export class FinalisationComponent {
     } else {
 
       this.is_auth = this._params.snapshot.queryParams['id_auth']
-      this.is_confirmed = this._params.snapshot.queryParams['is_confirmed']
+      this.is_confirmed = this._params.snapshot.queryParams['slug_id']
 
-      this.api._get(`register?is_auth=${this.is_auth}&approuved=${this.is_confirmed}`)
+      this.api._get(`inscription?is_auth=${this.is_auth}&approuved=${this.is_confirmed}`)
       .subscribe((res: any) => {
 
         if (res.succeed) {
@@ -77,34 +90,55 @@ export class FinalisationComponent {
 
   }
 
-  submit() {
-    if (this.mdp !== this.cfn) {
+  submit = () =>{
+    if (this.password !== this.cfn) {
       Swal.fire({
         icon: 'error',
         text : "Mot de passe non identique"
       })
     } else {
 
+      const user = {
+        first_name: this.first_name,
+        last_name: this.last_name,
+        surname: this.surname,
+        permission: this.permission,
+        password: this.password,
+        email: this.email,
+      }
+
+      const branch = {
+        phone: this.phone,
+        mail: this.mail,
+        city: this.city,
+        commune: this.commune,
+        quartier: this.quartier,
+        numero: this.numero,
+        avenue: this.avenue,
+        is_headquarter: this.is_headquarter,
+      }
+
       var data = {
-        categorie: this.activity,
-        password: this.mdp,
-        name: this.nom,
-        is_confirm: true,
-        slugId : this.is_auth
+        user: user,
+        branch: branch,
+        business: {
+          is_valid: true,
+          b_id : this.is_auth
+        }
       }
 
       Swal.fire(
         {
-          text : "êtes-vous sûr de procéder à l'étape suivante ?"
+          text : "êtes-vous sûr des informations entrées?"
         }
         ).then(dab => {
           if (dab.isConfirmed) {
             this.isLoading = true
-            this.api._post('register', data)
+            this.api._put('inscription', data)
             .subscribe((res: any) => {
               this.isLoading = false
               if (res.succeed) {
-                this.securestorage.setItem('OAuthBT', res.data)
+                this.securestorage.setItem('OAuthBT', JSON.stringify(res.data))
                 Swal.fire({
                   icon: 'success',
                   text : 'Votre espace a été bien activé'

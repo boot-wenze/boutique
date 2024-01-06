@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ArticleComponent } from './article.component';
+import { BranchComponent } from './branch.component';
 
-describe('ArticleComponent', () => {
-  let component: ArticleComponent;
-  let fixture: ComponentFixture<ArticleComponent>;
+describe('BranchComponent', () => {
+  let component: BranchComponent;
+  let fixture: ComponentFixture<BranchComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ArticleComponent]
+      declarations: [BranchComponent]
     });
-    fixture = TestBed.createComponent(ArticleComponent);
+    fixture = TestBed.createComponent(BranchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

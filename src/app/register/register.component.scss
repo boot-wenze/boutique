@@ -13,22 +13,45 @@
 
 .header{
     text-align: left;
+    margin: 1em 0;
 
     & > b{
         color: $green;
     }
 }
+.header + p, ol + p{
+    margin: 1em 0;
+}
+form{
+    button{
+        margin: 1em 0 2.5em 1.25em;
+    }
+}
 
 .form-group{
+    margin: 1.25em 0;
 
-    .form-control{
+    p.info{
+        color: $green;
+        font-size: 13px;
+        margin-left: 1em;
+    }
+
+    .form-control, select{
         width: 30%;
         border: none;
-        outline: 1px solid black;
+        outline: 1px solid #f2f2f2;
         height: 2.5em;
-        margin-left: 1em;
         border-radius: 4px;
         padding: 0 1em;
+        margin-left: 1em;
+
+        &:focus{
+            outline: 1px solid $green;
+        }
+    }
+    select{
+        text-transform: uppercase;
     }
 }
 .file{

@@ -9,16 +9,10 @@
 
 
 .grid{
-    display: grid;
-    grid-template-columns: repeat(4, 24%);
-    gap: 1.5em;
-    box-sizing: border-box;
+
 
     .card{
-        width: 100%;
-        background-color: #f2f2f2;
-        border-radius: 4px;
-        padding: 1em;
+        padding: .5em;
         box-sizing: border-box;
         position: relative;
         // height: 14.5em;
@@ -49,6 +43,7 @@
         .card-body{
             text-align: center;
             p{
+                line-height: 2.35em;
                 text-align: left;
                 display: flex;
                 justify-content: space-between;
@@ -59,7 +54,6 @@
                 }
             }
             .call-to-action{
-                margin-top: 0;
                 background-color: red;
 
             }
