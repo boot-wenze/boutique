@@ -54,7 +54,7 @@ export class ApiService {
   }
 
   getToken() : any | HttpHeaders {
-    this.user = this.securestorage.getItem('OAuth').toString()
+    this.user = JSON.parse(this.securestorage.getItem('OAuthBT')).token.toString()
 
     let headers = new HttpHeaders()
       .set('Authorization', `Token ${this.user}`)

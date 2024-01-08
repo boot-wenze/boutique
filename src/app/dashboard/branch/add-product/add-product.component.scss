@@ -11,6 +11,21 @@
     text-transform: uppercase;
     color: gray;
 }
+.btn{
+    background: black;
+    padding: 10px 2em;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em .5em;
+    span:first-child{
+        font-size: 20px;
+    }
+}
 .container{
     display: flex;
     justify-content: space-between;
@@ -26,7 +41,6 @@
     }
     &-item{
         width: 75%;
-
         .sticky{
             padding: 2em;
             position: sticky;
@@ -40,12 +54,6 @@
             p{
                 font-size: 18px;
                 font-weight: bold;
-            }
-            .btn{
-                background: black;
-                padding: 10px 2em;
-                color: white;
-                border-radius: 8px;
             }
         }
 
@@ -72,8 +80,18 @@
                         margin-left: .5em;
                     }
                 }
+                .info, .info-d{
+                    line-height: 0;
+                    margin: 0 0 2em 0;
+                    font-size: 12px;
+                    color: $green;
+                }
+                .info-d{
+                    font-size: 15px;
+                }
 
                 textarea{
+                    text-decoration: none;
                     width: 100%;
                     min-height: 200px;
                     max-height: 500px;
@@ -96,6 +114,7 @@
                 .form-control{
                     margin: 1em 0;
                     width: 100%;
+                    font-family: $ubuntu;
                 }
             }
 
@@ -111,6 +130,9 @@
                     background-size: 100% 100%;
                     cursor: pointer;
                 }
+                input[type="file"]{
+                    display: none;
+                }
             }
         }
 
@@ -119,6 +141,7 @@
     &-edit{
         width: 25%;
         padding: 2em;
+        font-family: $ubuntu;
         .title, .description, .detail-header{
             font-size: 18px;
             font-weight: bold;
@@ -150,40 +173,24 @@
                 }
             }
         }
-        .description{
-            margin: 1.5em auto;
-        }
-        .detail-header{
-            margin: 1.5em auto;
-        }
-
-        .modify, .delete{
-            text-align: center;
-            width: 100%;
-            margin: 2em auto;
-            padding: 10px;
-            border-radius: 8px;
+        .price-holder{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin: .5em auto 1em auto;
             font-weight: bold;
-            cursor: pointer;
         }
-        .delete{
-            background: lighten(red, 30);
-            color: red;
-        }
-        .modify{
-            background-color: black;
-            color: white;
-        }
-        .nom{
-            font-weight: bold;
-            margin-bottom: 1.5em;
-        }
-        .detail{
-            color: gray;
-        }
-        .price{
-            span{
-                font-weight: bold;
+        .my-size{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 1em;
+            p{
+                padding: 5px;
+                color: white;
+                background: #202120;
+                border-radius: 4px;
+                border: 1px solid #f2f2f2;
             }
         }
 

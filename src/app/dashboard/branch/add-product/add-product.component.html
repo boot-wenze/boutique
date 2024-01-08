@@ -10,7 +10,7 @@
                     Ajouter un produit
                 </p>
 
-                <div class="btn">
+                <div class="btn" (click)="onSubmitProduct()">
                     Publier
                 </div>
 
@@ -28,7 +28,7 @@
                         <p >
                             Titre
                         </p>
-                        <input type="text" class="form-control">
+                        <input type="text" [(ngModel)]="name" class="form-control">
 
                     </div>
 
@@ -36,8 +36,8 @@
                         <p >
                             Catégorie
                         </p>
-                        <select class="form-control" name="" id="">
-                            <option value="" disabled selected>catégorie</option>
+                        <select class="form-control" [(ngModel)]="category" >
+                            <option value="disabled" disabled selected>catégorie</option>
                             <option [value]="category" *ngFor="let category of categorie" >{{ category }}</option>
                         </select>
                     </div>
@@ -46,7 +46,7 @@
                         <p>
                             Description
                         </p>
-                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                        <textarea [(ngModel)]="description"></textarea>
 
                     </div>
 
@@ -60,9 +60,12 @@
                 <div class="cadre">
 
                     <div class="pictures">
-                        <img [src]="pic1" alt="">
-                        <img [src]="pic2" alt="">
-                        <img [src]="pic3" alt="">
+                        <input type="file" [(ngModel)]="pic1" (ngModelChange)="onChangePic('file1')" #file1>
+                        <input type="file" [(ngModel)]="pic2" (ngModelChange)="onChangePic('file2')" #file2>
+                        <input type="file" [(ngModel)]="pic3" (ngModelChange)="onChangePic('file3')" #file3>
+                        <img [src]="pic1" (click)="myPhoto('file1')" alt="">
+                        <img [src]="pic2" (click)="myPhoto('file2')" alt="">
+                        <img [src]="pic3" (click)="myPhoto('file3')" alt="">
                     </div>
 
                 </div>
@@ -74,40 +77,60 @@
                 <div class="cadre">
 
                     <div class="same-price">
-                        <input type="checkbox" name="" id="">
-                        <span>Ces articles ont-ils le même prix ?</span>
+                        <input type="checkbox" [(ngModel)]="checkbox">
+                        <span class="info-d">C'est un même produit, pris dans différents façade</span>
                     </div>
 
                     <div class="form-group">
                         <p >
                             Prix
                         </p>
-                        <input type="number" class="form-control">
-
+                        <input type="number" class="form-control" [(ngModel)]="price">
                     </div>
 
                     <div class="form-group">
                         <p >
-                            Taille
+                            Taille(s) & Nombre(s) ( Photo 1 )
                         </p>
-                        <input type="text" class="form-control">
-
+                        <input type="text" class="form-control" [(ngModel)]="size" >
+                        <p class="info">Taille:Nombre</p>
+                    </div>
+                    <div class="form-group" *ngIf="!checkbox">
+                        <p >
+                            Taille(s) & Nombre(s) ( Photo 2 )
+                        </p>
+                        <input type="text" class="form-control" [(ngModel)]="size1" >
+                        <p class="info">Taille:Nombre</p>
+                    </div>
+                    <div class="form-group" *ngIf="!checkbox">
+                        <p >
+                            Taille(s) & Nombre(s) ( Photo 3 )
+                        </p>
+                        <input type="text" class="form-control" [(ngModel)]="size2" >
+                        <p class="info">Taille:Nombre</p>
                     </div>
 
                     <div class="form-group">
                         <p >
                             Monnaie
                         </p>
-                        <select class="form-control" name="" id="">
-                            <option value="" disabled selected>Monnaie</option>
+                        <select class="form-control" [(ngModel)]="currency">
+                            <option value="disabled" disabled selected>Monnaie</option>
                             <option value="FC" >FC</option>
                             <option value="USD" >USD</option>
                         </select>
                     </div>
 
                     <div class="same-price">
-                        <input type="checkbox" name="" id="">
+                        <input type="checkbox" [(ngModel)]="discount">
                         <span>cet article a t-il une réduction ?</span>
+                    </div>
+
+                    <div class="form-group" *ngIf="discount" >
+                        <p >
+                            Réduction en %
+                        </p>
+                        <input type="number" class="form-control" [(ngModel)]="percent">
                     </div>
 
                 </div>
@@ -125,9 +148,40 @@
             <div class="images">
                 <img [src]="myImage" alt="" class="initial">
                 <div class="slider">
-                    <img [src]="photo" [ngClass]="{'active-photo': activeImage === photo }" *ngFor="let photo of photos" alt="" class="slide-photo">
+                    <img [src]="photo" (click)="changeImage(photo)" [ngClass]="{'active-photo': activeImage === photo }" *ngFor="let photo of photos" alt="" class="slide-photo">
                 </div>
             </div>
+
+            <div class="price-holder">
+                <p>{{ name }}</p>
+                <p *ngIf="price >= 0">{{ currency === "USD" ? "$" : "FC" }} {{ price }}</p>
+            </div>
+
+            <div class="size" *ngIf="user.bness.group === 'BOUTIQUE'">
+                <p>Taille</p>
+
+                <div class="my-size">
+                    <p *ngFor="let holder of sizeHolder">
+                        {{ holder }}
+                    </p>
+                </div>
+
+                <div class="btn">
+                    <span class="material-symbols-outlined">
+                        local_mall
+                    </span>
+                    <span>
+                        Ajouter au panier
+                    </span>
+                </div>
+            </div>
+            <p class="description" style="margin-top: 1em;">
+                Description
+            </p>
+            <p style="white-space: pre-wrap; margin-top: 2em;">
+                {{ description }}
+            </p>
+
 
 
         </div>
