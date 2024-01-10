@@ -33,9 +33,9 @@ export class AddProductComponent {
   activeImage: any
 
   name : any
-  size : any
   size1 : any
   size2 : any
+  size3 : any
   price : any
   currency : any = "USD"
   description : any
@@ -131,9 +131,10 @@ export class AddProductComponent {
       data.append('name', this.name)
       data.append('category', this.category)
       data.append('description', this.description)
-      data.append('size', this.size)
+      data.append('same_product', this.checkbox === true ? 'Oui' : 'No')
       data.append('size1', this.size1)
       data.append('size2', this.size2)
+      data.append('size3', this.size3)
       data.append('price', this.price)
       data.append('currency', this.currency)
       data.append('discount',  this.discount === true ? 'Oui' : 'No' )
