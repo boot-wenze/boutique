@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   rootUri: 'http://127.0.0.1:8000/api/',
+  ws_url: '127.0.0.1:8000/',
   version: 'dev',
 
 };
