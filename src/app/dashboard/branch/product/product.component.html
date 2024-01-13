@@ -53,7 +53,7 @@
 
             </div>
 
-            <div class="products">
+            <div class="products" *ngIf="data.length > 0">
 
                 <div
                     class="item"
@@ -72,10 +72,11 @@
                         </p>
                         <div class="stock">
                             <p>
-                                Stock <span>{{ item.stock }}</span>
+                                Stock <span>{{ sum(item.stock[0]) }}</span>
                             </p>
+
                             <p>
-                                Vendu <span>{{ item.sold }}</span>
+                                Vendu <span>{{ sum(item.stock[0]) - sum(item.disponible[0]) }}</span>
                             </p>
                         </div>
                     </div>
@@ -93,56 +94,98 @@
 
         <div class="container-edit">
 
-            <p class="title">
-                Modifier le produit
-            </p>
 
-            <div class="images">
-                <img [src]="myImage" alt="" class="initial">
-                <div class="slider">
-                    <img [src]="photo" [ngClass]="{'active-photo': activeImage === photo }" (click)="changeImage(photo)"  *ngFor="let photo of product.photos" alt="" class="slide-photo">
+            <div class="not-empty" *ngIf="data.length > 0" >
+
+                <p class="title">
+                    Modifier le produit
+                </p>
+
+                <div class="images">
+                    <img [src]="myImage" alt="" class="initial">
+                    <div class="slider">
+                        <img [src]="photo" [ngClass]="{'active-photo': activeImage === photo }" (click)="changeImage(photo, i)"  *ngFor="let photo of product.photos; let i = index" alt="" class="slide-photo">
+                    </div>
+                </div>
+
+                <p class="description">
+                    Description
+                </p>
+
+                <div class="edit-body">
+
+                    <p class="holder">Nom du produit</p>
+
+                    <p class="nom">{{ product.name }}</p>
+
+                    <p class="holder">Description</p>
+
+                    <p class="detail" style="white-space: pre-wrap;">
+                        {{ product.description }}
+                    </p>
+
+                    <p class="detail-header">
+                        Détail
+                    </p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Taille</th>
+                                <th>Quantité</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let cell of details">
+                                <td  >{{ cell.size }}</td>
+                                <td >{{ cell.quantity }}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <p class="detail-header">
+                        Disponible
+                    </p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Taille</th>
+                                <th>Quantité</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let cell of disponible">
+                                <td  >{{ cell.size }}</td>
+                                <td >{{ cell.quantity }}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <!-- <p class="price">
+                        Stock: <span>{{ product.stock }}</span>
+                    </p> -->
+                    <p class="price">
+                        Prix: <span>{{ product.currency }} {{ product.price }}</span>
+                    </p>
+                    <p class="price">
+                        Réduction: <span>{{ product.discount }}</span>
+                    </p>
+                    <p class="price">
+                        Réduction (%): <span>{{ product.discount_percentage }}</span>
+                    </p>
+
+                    <div (click)="delete()" class="delete" *ngIf="user.permission.can_delete">
+                        Supprimer
+                    </div>
+                    <!-- <div class="modify" *ngIf="user.permission.can_modify">
+                        Modifier
+                    </div> -->
+
+
                 </div>
             </div>
 
-            <p class="description">
-                Description
-            </p>
-
-            <div class="edit-body">
-
-                <p class="holder">Nom du produit</p>
-
-                <p class="nom">{{ product.name }}</p>
-
-                <p class="holder">Description</p>
-
-                <p class="detail">
-                    {{ product.description }}
-                </p>
-
-                <p class="detail-header">
-                    Détail
-                </p>
-
-                <p class="price">
-                    Prix: <span>{{ product.currency }} {{ product.price }}</span>
-                </p>
-                <p class="price">
-                    Stock: <span>{{ product.stock }}</span>
-                </p>
-                <p class="price">
-                    Vendu: <span>{{ product.sold }}</span>
-                </p>
-
-                <div class="delete" *ngIf="user.permission.can_delete">
-                    Supprimer
-                </div>
-                <div class="modify" *ngIf="user.permission.can_modify">
-                    Modifier
-                </div>
-
-
-            </div>
 
         </div>
 

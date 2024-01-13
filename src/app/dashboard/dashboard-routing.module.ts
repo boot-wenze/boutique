@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { EspaceComponent } from './espace/espace.component';
+import { CreateBranchComponent } from './create-branch/create-branch.component';
 
 const routes: Routes = [
   {
@@ -18,13 +19,13 @@ const routes: Routes = [
         component: EspaceComponent
       },
       {
+        path: 'create-branch',
+        component: CreateBranchComponent
+      },
+      {
         path: 'branch',
         loadChildren : ()=> import("./branch/branch.module").then(m => m.BranchModule)
-      },
-      // {
-      //   path: 'articles',
-      //   loadChildren : ()=> import("./articles/articles.module").then(m => m.ArticlesModule)
-      // },
+      }
     ]
   }
 ];

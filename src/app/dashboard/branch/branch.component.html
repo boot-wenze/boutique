@@ -2,7 +2,7 @@
 
     <div class="nav">
 
-        <div class="img-logo">
+        <div class="img-logo" [routerLink]="['/dashboard']">
             <img src="./assets/wnz.png" alt="">
             <p>WENZE  <span>{{data.quartier}}</span> </p>
         </div>
@@ -52,7 +52,19 @@
                 <span>Clients</span>
             </div>
 
-            <div class="nav-item">
+            <div
+
+                [routerLink]="['/dashboard/branch/settings']"
+                routerLinkActive="active"
+                class="nav-item"
+                [queryParams]="{
+                    id: data.managed_by,
+                    emplacement: data.quartier,
+                    avenue: data.address.avenue,
+                    n_: data.address.numero,
+                }"
+
+            >
                 <span class="material-symbols-rounded">
                     settings
                 </span>

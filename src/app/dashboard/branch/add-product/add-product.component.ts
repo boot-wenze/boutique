@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -44,11 +44,13 @@ export class AddProductComponent {
   percent = 0
   checkbox: boolean = false
   sizeHolder: any[] = [40, 41, 42]
+  isLoading: boolean = false
 
   constructor(
     private secureStorage: SecureStorageService,
     private api: ApiService,
-    private params: ActivatedRoute
+    private params: ActivatedRoute,
+    private _location: Location
   ) {
 
   }
@@ -64,21 +66,6 @@ export class AddProductComponent {
     this.photos.push(this.pic3)
 
     this.defaultPic()
-    // console.log(this.user);
-
-
-    // this.data = this.datasource
-
-
-    // this.activeProduct = this.data[0].id
-    // this.editProduct(this.activeProduct)
-
-    // const params = this.params.snapshot.queryParams
-
-    // this.link = this.user.branch.filter((e: any) =>
-    //   e.managed_by === params['id'] && e.quartier === params['emplacement'] &&
-    //   e.address.avenue === params['avenue'] && e.address.numero === parseInt(params['n_'])
-    // )[0]
   }
 
   myPhoto = (value: string) => {
@@ -143,8 +130,29 @@ export class AddProductComponent {
       data.append('photo2', this.file2.nativeElement.files[0])
       data.append('photo3', this.file3.nativeElement.files[0])
 
-      this.api.post('add_product', data)
-      .subscribe((res: any) => console.log(res))
+      Swal.fire({
+        text: "Vous êtes sur le point d'ajouter un article",
+      }).then((res) => {
+        if (res.isConfirmed) {
+
+          this.isLoading = true
+          this.loading()
+
+          this.api.post('add_product', data)
+          .subscribe((res: any) => {
+            this.isLoading = false
+            this.loading()
+            Swal.fire({
+              text : "Votre téléversement d'articles a été pris en compte et sera traité dans les prochaines minutes."
+            }).then((resp) => {
+              window.location.reload()
+            })
+
+          })
+
+        }
+      })
+
     } else {
       Swal.fire({
         title: "Fichier manquant !",
@@ -155,5 +163,19 @@ export class AddProductComponent {
 
 
   }
+
+  loading = () => {
+    if (this.isLoading) {
+      Swal.fire({
+        text: "Chargement des données...",
+        didOpen: () => {
+          Swal.showLoading()
+        }
+      })
+    } else {
+      return
+    }
+  }
+
 
 }
