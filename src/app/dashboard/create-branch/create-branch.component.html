@@ -5,7 +5,7 @@
 
         <img src="./assets/wnz.png" class="brand" alt="">
 
-        <form ngNativeValidate >
+        <form ngNativeValidate (submit)="onSubmit()">
 
             <h3>Ajouter une filiale : </h3>
             <div class="form-group">
@@ -40,7 +40,8 @@
             <div class="form-group">
                 <label for="">Gérer par : </label>
                 <select name="user" id="user" class="form-control" [(ngModel)]="managed_by" required>
-                    <option value=" " selected disabled>Choissiser un manager</option>
+                    <option value="" selected disabled>Manager</option>
+                    <option [value]="user.user_id" *ngFor="let user of data">{{ user.first_name }} {{ user.last_name }} {{ user.surname }}</option>
                 </select>
             </div>
 

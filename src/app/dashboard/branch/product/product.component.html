@@ -24,10 +24,7 @@
                             class="add-product"
                             [routerLink]="['/dashboard/branch/product/add-product']"
                             [queryParams]="{
-                                id: link.managed_by,
-                                emplacement: link.quartier,
-                                avenue: link.address.avenue,
-                                n_: link.address.numero,
+                                id: getBranchId
                             }"
                         >
                             <p>Ajouter un produit</p>
@@ -53,7 +50,7 @@
 
             </div>
 
-            <div class="products" *ngIf="data.length > 0">
+            <div class="products" *ngIf="data.length">
 
                 <div
                     class="item"
@@ -95,7 +92,7 @@
         <div class="container-edit">
 
 
-            <div class="not-empty" *ngIf="data.length > 0" >
+            <div class="not-empty" *ngIf="data.length" >
 
                 <p class="title">
                     Modifier le produit
@@ -162,9 +159,7 @@
 
                         </tbody>
                     </table>
-                    <!-- <p class="price">
-                        Stock: <span>{{ product.stock }}</span>
-                    </p> -->
+
                     <p class="price">
                         Prix: <span>{{ product.currency }} {{ product.price }}</span>
                     </p>

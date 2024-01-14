@@ -4,7 +4,7 @@
 
         <div class="img-logo" [routerLink]="['/dashboard']">
             <img src="./assets/wnz.png" alt="">
-            <p>WENZE  <span>{{data.quartier}}</span> </p>
+            <p>WENZE  <span>{{quartier}}</span> </p>
         </div>
 
 
@@ -15,10 +15,7 @@
                 class="nav-item"
                 routerLinkActive="active"
                 [queryParams]="{
-                    id: data.managed_by,
-                    emplacement: data.quartier,
-                    avenue: data.address.avenue,
-                    n_: data.address.numero,
+                    id: paramsData
                 }"
             >
                 <span class="material-symbols-rounded">
@@ -32,10 +29,7 @@
                 routerLinkActive="active"
                 class="nav-item"
                 [queryParams]="{
-                    id: data.managed_by,
-                    emplacement: data.quartier,
-                    avenue: data.address.avenue,
-                    n_: data.address.numero,
+                    id: paramsData
                 }"
 
             >
@@ -58,10 +52,7 @@
                 routerLinkActive="active"
                 class="nav-item"
                 [queryParams]="{
-                    id: data.managed_by,
-                    emplacement: data.quartier,
-                    avenue: data.address.avenue,
-                    n_: data.address.numero,
+                    id: paramsData
                 }"
 
             >

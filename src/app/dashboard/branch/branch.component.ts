@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { SecureStorageService } from 'src/app/services/secure-storage';
+import { WebsocketService } from 'src/app/services/websocket.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-branch',
@@ -11,28 +13,28 @@ import { SecureStorageService } from 'src/app/services/secure-storage';
 export class BranchComponent {
   data !: any
   user !: any
+  quartier = " "
+  paramsData !: any
 
   constructor(
-    private secureStorage: SecureStorageService,
     private api: ApiService,
-    private params: ActivatedRoute
+    private params: ActivatedRoute,
   ) {
 
   }
 
   ngOnInit(){
-    const data = this.api.getInfo()
 
     const params = this.params.snapshot.queryParams
 
+    this.paramsData = params['id']
 
-
-    this.data = data.branch.filter((e: any) =>
-      e.managed_by === params['id'] && e.quartier === params['emplacement'] &&
-      e.address.avenue === params['avenue'] && e.address.numero === parseInt(params['n_'])
-    )
-    this.data = this.data[0]
+    const data = this.api.getInfo()
     this.user = data.user
+
+
+
+
 
   }
 

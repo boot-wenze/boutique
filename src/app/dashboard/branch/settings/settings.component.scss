@@ -11,4 +11,100 @@
     // width: 80%;
     padding: 2em;
     margin: auto;
+    font-family: $font-family;
+
+    .header{
+        background: white;
+        position: sticky;
+        top: 0;
+        padding: 20px;
+        color: gray;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 1em;
+        margin-bottom: 2em;
+        p{
+            font-weight: bold;
+            margin: auto 1em;
+            cursor: pointer;
+        }
+        .active{
+            color: $green;
+            position: relative;
+            &::after{
+                content: "";
+                width: 100%;
+                height: 2px;
+                background: $green;
+                position: absolute;
+                transform: translate(-50%, -50%);
+                bottom: -70%;
+                left: 50%;
+            }
+        }
+    }
+
+    .content-item{
+        form{
+            p{
+                margin:4em 0 0 .25em;
+                font-weight: bold;
+                font-size: 15px;
+                line-height: 0;
+            }
+        }
+        .form-group{
+            margin: 2.5em 0;
+            .form-control{
+                outline: 1px solid gray;
+                &:focus{
+                    outline-color: $green;
+                }
+            }
+            input[type='checkbox']{
+                margin-right: .5em;
+                accent-color: $green;
+            }
+        }
+
+        .collaborators{
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-end;
+            gap: 1.5em;
+            flex-wrap: wrap;
+            .collaborator{
+                width: 15%;
+                padding: 1.5% 10px 10px 10px;
+                background: #f2f2f2;
+                border-radius: 8px;
+                text-align: center;
+                text-transform: uppercase;
+                img{
+                    border-radius: 50%;
+                    margin-bottom: 1.2em;
+                }
+                .name{
+                    font-weight: bold;
+                }
+                .text{
+                    font-size: 13px;
+                    line-height: 10px;
+                    margin: 0 auto;
+                }
+                .action-space{
+                    margin-top: 2em;
+                    margin-bottom: 0;
+                    line-height: 0;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    span{
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
 }

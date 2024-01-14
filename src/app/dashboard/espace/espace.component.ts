@@ -1,6 +1,7 @@
-import { SecureStorageService } from 'src/app/services/secure-storage';
 import { Component } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
+import { WebsocketService } from 'src/app/services/websocket.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-espace',
@@ -10,17 +11,35 @@ import { ApiService } from 'src/app/services/api.service';
 export class EspaceComponent {
 
   data !: any
+  user !: any
 
   constructor(
-    private secureStorage: SecureStorageService,
-    private api: ApiService
+    private api: ApiService,
+    private websocketService: WebsocketService
   ) {
 
   }
 
   ngOnInit(){
-    this.data = this.api.getInfo()
-    // console.log(this.data);
+    this.user = this.api.getInfo()
+
+
+    const ids = {
+      b_id : this.user.bness.b_id,
+      user_id : this.user.user.user_id,
+    }
+
+    this.websocketService.connect(
+      `ws://${environment.ws_url}ws/getAllBranchs/${this.user.bness.b_id}`
+    );
+
+    this.websocketService.sendMessage(JSON.stringify(ids))
+    this.websocketService.getMessages()
+    .subscribe((res: any) => {
+      this.data = res
+      // console.log(this.data)
+
+    })
 
   }
 

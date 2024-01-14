@@ -3,6 +3,105 @@
 
     <div class="container">
 
+        <div class="header">
+            <p (click)="onChangePanel(compte)" [ngClass]="{'active': panel === compte}" *ngFor="let compte of comptes" >{{ compte }}</p>
+        </div>
+
+
+        <div *ngIf="panel === 'Ajouter un collaborateur'"  class="content-item">
+
+
+            <form ngNativeValidate (submit)="onSubmit()">
+
+
+                <div class="form-group">
+                    <input type="text" minlength="2" [(ngModel)]="first_name" placeholder="Prénom" class="form-control" required name="name">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" minlength="2" [(ngModel)]="last_name" placeholder="Nom" class="form-control" required name="lastname">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" minlength="2" [(ngModel)]="surname" placeholder="Post-nom" class="form-control" name="surname">
+                </div>
+
+                <div class="form-group">
+                    <input type="email" minlength="2" [(ngModel)]="email" placeholder="E-mail" class="form-control" name="email">
+                </div>
+
+                <div class="form-group">
+                    <select name="user" id="user" class="form-control" [(ngModel)]="permission" required>
+                        <option value=" " selected disabled>Type de collaborateur</option>
+                        <option value="ADMIN">ADMINISTRATEUR</option>
+                        <option value="COLLABORATOR">COLLABORATEUR</option>
+                        <option value="EMPLOYER">MANAGER</option>
+                    </select>
+                </div>
+
+                <p>Autorisation : </p>
+
+                <div class="form-group">
+                    <input type="checkbox" [(ngModel)]="can_add" name="can_add">
+                    <label for="">Peut ajouter les articles</label>
+                </div>
+
+                <div class="form-group">
+                    <input type="checkbox" [(ngModel)]="can_delete" name="can_delete">
+                    <label for="">Peut supprimer les articles</label>
+                </div>
+
+                <div class="form-group">
+                    <input type="checkbox" [(ngModel)]="can_modify" name="can_modify">
+                    <label for="">Peut modifier les articles</label>
+                </div>
+
+                <button type="submit"  class="call-to-action">Ajouter</button>
+
+
+            </form>
+
+
+        </div>
+
+        <div *ngIf="panel === 'Gérer vos filiale'"  class="content-item">
+            <p>Gérer vos filiale</p>
+        </div>
+
+        <div *ngIf="panel === 'Gérer vos collaborateur'"  class="content-item">
+
+
+            <div class="collaborators">
+
+                <div class="collaborator" *ngFor="let collaborator of data">
+                    <img src="https://ui-avatars.com/api/?background=random&name={{collaborator.first_name}} {{ collaborator.last_name }}" alt="">
+                    <p class="name" *ngIf="collaborator.user_id === user.user.user_id" >MOI</p>
+                    <p class="name" *ngIf="collaborator.user_id !== user.user.user_id">{{collaborator.first_name}} {{ collaborator.last_name }} {{ collaborator.surname }}</p>
+                    <p class="text">{{collaborator.permission}}</p>
+
+                    <div [ngStyle]="{'visibility' : collaborator.user_id === user.user.user_id && 'hidden' }" class="action-space">
+                        <span class="material-symbols-outlined">
+                            delete
+                        </span>
+
+                        <span class="material-symbols-outlined">
+                            ad_off
+                        </span>
+
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+        <div *ngIf="panel === 'Gérer vos données'"  class="content-item">
+            <p>Gérer vos données</p>
+        </div>
 
 
     </div>
