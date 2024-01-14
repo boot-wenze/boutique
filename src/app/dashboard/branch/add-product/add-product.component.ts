@@ -38,6 +38,7 @@ export class AddProductComponent {
   size3 : any
   price : any
   currency : any = "USD"
+  destinated_to : any = "NEUTRE"
   description : any
   discount : any = false
   category: any = ""
@@ -45,6 +46,10 @@ export class AddProductComponent {
   checkbox: boolean = false
   sizeHolder: any[] = [40, 41, 42]
   isLoading: boolean = false
+  branch_id: string = ""
+  for : any[] = [
+    "HOMME", "FEMME", "ENFANTS", "NEUTRE"
+  ]
 
   constructor(
     private secureStorage: SecureStorageService,
@@ -60,6 +65,10 @@ export class AddProductComponent {
     this.user = this.api.getInfo()
     this.categorie = this.user.bness.category
     this.categorie = this.categorie.split(' ')
+
+    this.branch_id = this.params.snapshot.queryParams["id"]
+
+    // console.log(this.branch_id)
 
     this.photos.push(this.pic1)
     this.photos.push(this.pic2)
@@ -115,6 +124,7 @@ export class AddProductComponent {
 
       const data = new FormData()
 
+      data.append('branch_id', this.branch_id)
       data.append('name', this.name)
       data.append('category', this.category)
       data.append('description', this.description)
@@ -124,6 +134,7 @@ export class AddProductComponent {
       data.append('size3', this.size3)
       data.append('price', this.price)
       data.append('currency', this.currency)
+      data.append('destinated_to', this.destinated_to)
       data.append('discount',  this.discount === true ? 'Oui' : 'No' )
       data.append('discount_percentage', result)
       data.append('photo1', this.file1.nativeElement.files[0])

@@ -37,7 +37,7 @@
                             Catégorie
                         </p>
                         <select class="form-control" [(ngModel)]="category" >
-                            <option value="disabled" disabled selected>catégorie</option>
+                            <option value="" disabled selected>catégorie</option>
                             <option [value]="category" *ngFor="let category of categorie" >{{ category }}</option>
                         </select>
                     </div>
@@ -60,9 +60,9 @@
                 <div class="cadre">
 
                     <div class="pictures">
-                        <input type="file" [(ngModel)]="pic1" (ngModelChange)="onChangePic('file1')" #file1>
-                        <input type="file" [(ngModel)]="pic2" (ngModelChange)="onChangePic('file2')" #file2>
-                        <input type="file" [(ngModel)]="pic3" (ngModelChange)="onChangePic('file3')" #file3>
+                        <input type="file" [(ngModel)]="pic1"  (change)="onChangePic('file1')" #file1>
+                        <input type="file" [(ngModel)]="pic2"  (change)="onChangePic('file2')" #file2>
+                        <input type="file" [(ngModel)]="pic3"  (change)="onChangePic('file3')" #file3>
                         <img [src]="pic1" (click)="myPhoto('file1')" alt="">
                         <img [src]="pic2" (click)="myPhoto('file2')" alt="">
                         <img [src]="pic3" (click)="myPhoto('file3')" alt="">
@@ -79,6 +79,16 @@
                     <div class="same-price">
                         <input type="checkbox" [(ngModel)]="checkbox">
                         <span class="info-d">C'est un même produit, pris dans différents façade</span>
+                    </div>
+
+                    <div class="form-group">
+                        <p >
+                            Destiné aux
+                        </p>
+                        <select name="user" id="user" class="form-control" [(ngModel)]="destinated_to" required>
+                            <option value=" " selected disabled>Cet article est destiné aux </option>
+                            <option [value]="destinated_to" *ngFor="let destinated_to of for">{{ destinated_to }}</option>
+                        </select>
                     </div>
 
                     <div class="form-group">

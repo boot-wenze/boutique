@@ -68,7 +68,7 @@
             <p>Gérer vos filiale</p>
         </div>
 
-        <div *ngIf="panel === 'Gérer vos collaborateur'"  class="content-item">
+        <div *ngIf="panel === 'Gérer vos collaborateurs' || panel === 'Vos collaborateurs'"  class="content-item">
 
 
             <div class="collaborators">
@@ -76,10 +76,11 @@
                 <div class="collaborator" *ngFor="let collaborator of data">
                     <img src="https://ui-avatars.com/api/?background=random&name={{collaborator.first_name}} {{ collaborator.last_name }}" alt="">
                     <p class="name" *ngIf="collaborator.user_id === user.user.user_id" >MOI</p>
-                    <p class="name" *ngIf="collaborator.user_id !== user.user.user_id">{{collaborator.first_name}} {{ collaborator.last_name }} {{ collaborator.surname }}</p>
+                    <p class="name" *ngIf="collaborator.user_id !== user.user.user_id">{{collaborator.username}}</p>
                     <p class="text">{{collaborator.permission}}</p>
+                    <!-- <p class="text" *ngIf="user.permission.type !== 'ADMIN'">{{collaborator.email}}</p> -->
 
-                    <div [ngStyle]="{'visibility' : collaborator.user_id === user.user.user_id && 'hidden' }" class="action-space">
+                    <div *ngIf="user.permission.type === 'ADMIN'" [ngStyle]="{'visibility' : collaborator.user_id === user.user.user_id && 'hidden' }" class="action-space">
                         <span class="material-symbols-outlined">
                             delete
                         </span>

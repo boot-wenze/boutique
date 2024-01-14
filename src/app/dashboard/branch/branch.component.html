@@ -62,7 +62,7 @@
                 <span>Réglages</span>
             </div>
 
-            <div class="logo">
+            <div class="logo" (click)="logOut()">
                 <img src="https://ui-avatars.com/api/?name={{user.first_name}} {{user.last_name}}" alt="" class="img">
                 <p class="title">{{user.username}}</p>
             </div>

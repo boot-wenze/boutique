@@ -20,8 +20,8 @@ export class SettingsComponent {
 
   comptes = [
     "Ajouter un collaborateur",
-    "Gérer vos filiale",
-    "Gérer vos collaborateur",
+    "Gérer vos filiales",
+    "Gérer vos collaborateurs",
     "Gérer vos données"
   ]
   first_name = ""
@@ -37,7 +37,7 @@ export class SettingsComponent {
 
   data: any
 
-  panel : string = "Gérer vos collaborateur"
+  panel : string = "Gérer vos collaborateurs"
   constructor(
     private api: ApiService,
     private websocketService: WebsocketService,
@@ -48,6 +48,14 @@ export class SettingsComponent {
   ngOnInit() {
     this.user = this.api.getInfo()
     // console.log(this.user)
+    if (this.user.permission.type !== 'ADMIN') {
+      this.panel = "Vos collaborateurs"
+      this.comptes = [
+        "Vos filiales",
+        "Vos collaborateurs",
+        "Gérer vos données"
+      ]
+    }
 
     this.onChangePanel(this.panel)
   }
@@ -55,7 +63,7 @@ export class SettingsComponent {
   onChangePanel = (name: string) => {
     this.panel = name
 
-    if (name == "Gérer vos collaborateur") {
+    if (name == "Gérer vos collaborateurs" || name == "Vos collaborateurs") {
 
       this.api.get('user')
       .subscribe((res: any) => res)
@@ -66,7 +74,11 @@ export class SettingsComponent {
       );
 
       this.websocketService.getMessages()
-      .subscribe((res: any)=> this.data = res )
+      .subscribe((res: any) => {
+        this.data = res
+        // console.log(this.data);
+
+      })
 
     }
   }
