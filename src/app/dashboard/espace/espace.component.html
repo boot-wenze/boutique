@@ -4,12 +4,12 @@
 
     <div class="container" *ngIf="data">
 
-        <p class="logo">{{data.bness.name}}</p>
+        <p class="logo" *ngIf="has_access" [routerLink]="['/']" >{{data.bness.name}}</p>
 
         <!-- <p class="branch">Branche(s)</p> -->
 
 
-        <div class="branchs">
+        <div class="branchs" *ngIf="has_access">
 
             <div class="item"
                 [routerLink]="['/dashboard/branch']"
@@ -49,6 +49,39 @@
                 </span>
             </div>
 
+
+        </div>
+
+        <div class="plans">
+            <p class="sub-title" >Trouver vos plans</p>
+
+            <p class="title" [routerLink]="['/']">Trouver le <span>Bon Plan</span> pour <span>{{data.bness.name}}</span></p>
+
+            <div class="subscriptions">
+
+                <div class="subscription" *ngFor="let sub of subscription; let i = index">
+
+                    <p class="subs-title">{{ sub }}</p>
+
+                    <p class="price">${{ prices[i] }} <sup>mois</sup></p>
+
+                    <p class="text" *ngFor="let text of subs[i]">
+                        <span class="material-symbols-outlined">
+                            radio_button_checked
+                        </span>
+                        <span>
+                            {{ text }}
+                        </span>
+                    </p>
+
+                    <div class="call-to-action">
+                        Souscrire
+                    </div>
+
+                </div>
+
+
+            </div>
 
         </div>
 

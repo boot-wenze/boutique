@@ -58,25 +58,29 @@ export class ProductComponent {
     this.getBranchId = this.params.snapshot.queryParams['id']
 
     this.api.get(`add_product?id=${this.getBranchId}`)
-    .subscribe((res: any)=> res
+    .subscribe((res: any)=> {
+      if(res.message === "added to the queue"){
+
+        this.websocketService.connect(`ws://${environment.ws_url}ws/items/${this.getBranchId}`);
+
+        this.websocketService.getMessages().subscribe((message) => {
+          this.user = this.api.getInfo()
+          // console.log(message.items);
+          this.datasource = message.items
+          this.categorie = this.user.bness.category
+          this.categorie = this.categorie.split(' ')
+          this.categorie.unshift("Tous")
+          this.active = "Tous"
+
+          this.data = this.datasource
+
+          this.removeErrors()
+
+        })
+      }
+    }
     )
 
-    this.websocketService.connect(`ws://${environment.ws_url}ws/items/${this.getBranchId}`);
-
-    this.websocketService.getMessages().subscribe((message) => {
-      this.user = this.api.getInfo()
-      // console.log(message.items);
-      this.datasource = message.items
-      this.categorie = this.user.bness.category
-      this.categorie = this.categorie.split(' ')
-      this.categorie.unshift("Tous")
-      this.active = "Tous"
-
-      this.data = this.datasource
-
-      this.removeErrors()
-
-    })
 
   }
 

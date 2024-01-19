@@ -1,3 +1,4 @@
+import { SecureStorageService } from 'src/app/services/secure-storage';
 import { Component } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { WebsocketService } from 'src/app/services/websocket.service';
@@ -12,10 +13,41 @@ export class EspaceComponent {
 
   data !: any
   user !: any
+  has_access !: any
+
+  subscription = [
+    "basique",
+    "standard",
+    "avancée",
+    "business",
+  ]
+  subs = [
+    ["Branche Principale incluse", "Frais Logistique de Livraison à 5$"],
+    [
+      "Branche Principale incluse",
+      "Frais Logistiues Offerts",
+      "Possibilité d'Ajouter 2 Filiales Supplémentaires"
+    ],
+    [
+      "Branche Principale incluse",
+      "Frais Logistiues Offerts",
+      "Extension jusqu'à 5 Filiales Incluse",
+      "Suivi Visuel des Transactions Entrantes et Sortantes"
+    ],
+    [
+      "Branche Principale incluse",
+      "Frais Logistiues Offerts",
+      "Création illimité des filiales",
+      "Suivi Visuel des Transactions Entrantes et Sortantes",
+      "Gestion Complète des Retours de Colis"
+    ],
+  ]
+  prices = [ 10.99, 20.99, 50.99, 100.99]
 
   constructor(
     private api: ApiService,
-    private websocketService: WebsocketService
+    private websocketService: WebsocketService,
+    private secureStorage : SecureStorageService
   ) {
 
   }
@@ -38,6 +70,13 @@ export class EspaceComponent {
     .subscribe((res: any) => {
       this.data = res
       // console.log(this.data)
+      this.secureStorage.setItem("has_access", JSON.stringify(this.data.has_access))
+
+      var access = this.secureStorage.getItem("has_access")
+
+      this.has_access = JSON.parse(access).has_access
+
+      // console.log(has_access);
 
     })
 

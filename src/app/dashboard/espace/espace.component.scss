@@ -12,7 +12,7 @@
 }
 
 .container{
-    width: 70%;
+    width: 80%;
     margin: auto;
 
     .logo{
@@ -25,6 +25,87 @@
     .branch{
         color: $green;
         margin-bottom: 1.5em;
+    }
+
+    .plans{
+        text-align: center;
+        .sub-title{
+            color: #f2f2f2;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .title{
+            font-size: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin: 1.5em auto;
+            color: gray;
+            span{
+                text-decoration: underline;
+                color: $green;
+            }
+        }
+        .subscriptions{
+            margin: 5em auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1em 3em;
+            box-sizing: border-box;
+            .subscription{
+                border-radius: 8px;
+                border: 1px solid #f2f2f2;
+                padding: 1em;
+                width: 25%;
+                text-align: left;
+                height: 32em;
+                position: relative;
+                &:hover{
+                    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+                    cursor: pointer;
+                }
+                &:nth-child(2){
+                    background-color: black;
+                    color: $green;
+                    .call-to-action{
+                        background: $green;
+                        color: white;
+                        font-weight: bolder;
+                    }
+                }
+                .subs-title{
+                    text-transform: uppercase;
+                    text-align: center;
+                    font-weight: bold;
+                    font-family: $ubuntu;
+                    font-size: 20px;
+                    margin-bottom: 1em;
+                }
+                .price{
+                    font-weight: bold;
+                    margin: 2em auto;
+                    font-size: 18px;
+                }
+                .text{
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    gap: 1em;
+                    font-family: $font-family;
+                    font-weight: bolder;
+                }
+
+                .call-to-action{
+                    position: absolute;
+                    transform: translate(-50%, -50%);
+                    left: 50%;
+                    bottom: -3%;
+                    width: 92%;
+                    margin: auto;
+                    text-align: center;
+                }
+            }
+        }
     }
 
     .branchs{

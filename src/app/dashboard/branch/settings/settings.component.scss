@@ -46,6 +46,86 @@
     }
 
     .content-item{
+
+        .empty{
+            text-align: center;
+            font-weight: 900;
+            font-size: 70px;
+            margin: 4em auto;
+            text-transform: uppercase;
+            color: gray;
+        }
+
+        table{
+            border-collapse: collapse;
+            width: 100%;
+
+            // & tr:nth-child(even){
+            //     background-color: #f2f2f2;
+            // }
+
+            & tr:hover {
+                background-color: #ddd;
+            }
+
+            & th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                color: black;
+            }
+            th, td {
+                padding: 15px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+            tr{
+                cursor: pointer;
+                td.produit{
+                    display: flex;
+                    place-items: center;
+                    gap: .5em;
+                    img{
+                        cursor: pointer;
+                        height: 40px;
+                        width: 40px;
+                    }
+                }
+            }
+
+            .pending{
+                background: lighten(orange, 40);
+                border-radius: 20px;
+                padding: 10px 15px;
+                color: orange;
+                font-weight: bold;
+            }
+            .complet{
+                background: lighten($green, 43);
+                border-radius: 20px;
+                padding: 10px 15px;
+                color: $green;
+                font-weight: bold;
+            }
+            .priority{
+                color: $green;
+                font-weight: bold;
+            }
+            .not-priority{
+                color: black;
+                font-weight: bold;
+            }
+            .annuler{
+                background: lighten(red, 43);
+                border-radius: 20px;
+                padding: 10px 15px;
+                color: red;
+                font-weight: bold;
+            }
+            span{
+                font-size: 12px;
+            }
+        }
         form{
             p{
                 margin:4em 0 0 .25em;
@@ -54,12 +134,35 @@
                 line-height: 0;
             }
         }
+        .call-to-action{
+            width: 30%;
+            text-align: center;
+        }
         .form-group{
-            margin: 2.5em 0;
-            .form-control{
-                outline: 1px solid gray;
-                &:focus{
-                    outline-color: $green;
+            margin: 2em 0;
+            width: 30%;
+            p{
+                font-weight: bold;
+                margin-bottom: 1.5em;
+            }
+            .form-element{
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                background-color: #f2f2f2;
+                border-radius: 8px;
+                padding: 5px;
+                margin-top: 1em;
+
+                .material-symbols-rounded{
+                    font-variation-settings:
+                    'FILL' 1,
+                }
+                .form-control{
+                    width: 100%;
+                    background: inherit;
+                    border: none;
+                    outline: none;
                 }
             }
             input[type='checkbox']{
@@ -87,9 +190,10 @@
                 }
                 .name{
                     font-weight: bold;
+                    font-size: 13px;
                 }
                 .text{
-                    font-size: 13px;
+                    font-size: 12.5px;
                     line-height: 10px;
                     margin: 0 auto;
                 }

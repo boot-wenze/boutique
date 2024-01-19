@@ -13,30 +13,65 @@
 
             <form ngNativeValidate (submit)="onSubmit()">
 
-
                 <div class="form-group">
-                    <input type="text" minlength="2" [(ngModel)]="first_name" placeholder="Prénom" class="form-control" required name="name">
+                    <p>Prénom</p>
+                    <div class="form-element">
+                        <span class="material-symbols-rounded">
+                            person
+                        </span>
+
+                        <input type="text" minlength="2" [(ngModel)]="first_name" placeholder="Prénom" class="form-control" required name="name">
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <input type="text" minlength="2" [(ngModel)]="last_name" placeholder="Nom" class="form-control" required name="lastname">
+                    <p>Nom</p>
+                    <div class="form-element">
+                        <span class="material-symbols-rounded">
+                            person
+                        </span>
+
+                        <input type="text" minlength="2" [(ngModel)]="last_name" placeholder="Nom" class="form-control" required name="lastname">
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <input type="text" minlength="2" [(ngModel)]="surname" placeholder="Post-nom" class="form-control" name="surname">
+                    <p>Post-nom</p>
+                    <div class="form-element">
+                        <span class="material-symbols-rounded">
+                            person
+                        </span>
+
+                        <input type="text" minlength="2" [(ngModel)]="surname" placeholder="Post-nom" class="form-control" name="surname">
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <input type="email" minlength="2" [(ngModel)]="email" placeholder="E-mail" class="form-control" name="email">
+                    <p>E-mail</p>
+                    <div class="form-element">
+                        <span class="material-symbols-rounded">
+                            mail
+                        </span>
+
+                        <input type="email" minlength="2" [(ngModel)]="email" placeholder="E-mail" class="form-control" name="email">
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <select name="user" id="user" class="form-control" [(ngModel)]="permission" required>
-                        <option value=" " selected disabled>Type de collaborateur</option>
-                        <option value="ADMIN">ADMINISTRATEUR</option>
-                        <option value="COLLABORATOR">COLLABORATEUR</option>
-                        <option value="EMPLOYER">MANAGER</option>
-                    </select>
+                    <p>Type de collaborateur</p>
+
+                    <div class="form-element">
+                        <span class="material-symbols-rounded">
+                            workspaces
+                        </span>
+
+                        <select name="user" id="user" class="form-control" [(ngModel)]="permission" required>
+                            <option value=" " selected disabled>Type de collaborateur</option>
+                            <option value="ADMIN">ADMINISTRATEUR</option>
+                            <option value="COLLABORATOR">COLLABORATEUR</option>
+                            <option value="EMPLOYER">MANAGER</option>
+                        </select>
+                    </div>
                 </div>
 
                 <p>Autorisation : </p>
@@ -64,8 +99,54 @@
 
         </div>
 
-        <div *ngIf="panel === 'Gérer vos filiale'"  class="content-item">
-            <p>Gérer vos filiale</p>
+        <div *ngIf="panel === 'Gérer vos filiales' || panel === 'Vos filiales'"  class="content-item">
+
+            <div class="table">
+
+                <p class="empty" *ngIf="!data.length">AUCUNE FILIALE TROUVé</p>
+
+                <table *ngIf="data.length">
+                    <thead>
+                        <tr>
+                            <th>
+                                #
+                            </th>
+                            <th>
+                                N° Branch
+                            </th>
+                            <th>
+                                Ville
+                            </th>
+                            <th>
+                                Commune
+                            </th>
+                            <th>
+                                Quartier
+                            </th>
+                            <th>
+                                Gérer par
+                            </th>
+                            <th>
+                                Téléphone
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr (click)="goTo(data.branch_id, datasource.user.can_edit)" *ngFor="let data of data, let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ data.branch_id }}</td>
+                            <td>{{ data.city }}</td>
+                            <td>{{ data.commune }}</td>
+                            <td>{{ data.quartier }}</td>
+                            <td>{{ data.managed_by }}</td>
+                            <td>{{ data.phone }}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
         </div>
 
         <div *ngIf="panel === 'Gérer vos collaborateurs' || panel === 'Vos collaborateurs'"  class="content-item">
@@ -101,7 +182,35 @@
 
         </div>
         <div *ngIf="panel === 'Gérer vos données'"  class="content-item">
-            <p>Gérer vos données</p>
+            <div class="form-group">
+                <p>Mot de passe actuel</p>
+                <div class="form-element">
+                    <span class="material-symbols-rounded">
+                        lock
+                    </span>
+                    <input type="password" minlength="8" placeholder="Mot de passe" class="form-control" required name="pswd">
+                </div>
+            </div>
+            <div class="form-group">
+                <p>Nouveau mot de passe</p>
+                <div class="form-element">
+                    <span class="material-symbols-rounded">
+                        lock
+                    </span>
+                    <input type="password" minlength="8" placeholder="Nouveau mot de passe" class="form-control" required name="pswd">
+                </div>
+            </div>
+            <div class="form-group">
+                <p>Confirmer le nouveau de passe actuel</p>
+                <div class="form-element">
+                    <span class="material-symbols-rounded">
+                        lock
+                    </span>
+                    <input type="password" minlength="8" placeholder="Confirmer nouveau mot de passe" class="form-control" required name="pswd">
+                </div>
+            </div>
+
+            <div class="call-to-action">Changer le mot de passe</div>
         </div>
 
 

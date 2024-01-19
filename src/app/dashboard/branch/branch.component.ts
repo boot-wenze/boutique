@@ -19,12 +19,21 @@ export class BranchComponent {
   constructor(
     private api: ApiService,
     private params: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private secureStorage: SecureStorageService
   ) {
 
   }
 
-  ngOnInit(){
+  ngOnInit() {
+
+    var access = this.secureStorage.getItem("has_access")
+
+    var has_access = JSON.parse(access).has_access
+
+    if (!has_access) {
+      this.router.navigate(["/dashboard"])
+    }
 
     const params = this.params.snapshot.queryParams
 
