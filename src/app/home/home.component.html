@@ -1,15 +1,21 @@
 
 <div class="body-element" *ngIf="!isLoading" >
 
+    <div class="scroller"></div>
+
     <nav class="navbar" #navbar>
 
-        <div class="brand">
-            <img src="./assets/wnz.png" alt="">
+        <div class="brand" [routerLink]="['/']">
+            <p>WENZE</p>
+            <!-- <img src="./assets/wnz.png" alt=""> -->
         </div>
 
         <div class="navbar-items">
 
 
+            <div class="navbar-item" (click)="scrollId('tarif')">
+                Tarification
+            </div>
             <div *ngIf="!isLocalStorage" (click)="loginForm()" class="login navbar-item">
 
                 <span class="material-icons">
@@ -47,121 +53,85 @@
     <div class="showcase">
 
         <div class="boutique">
-            <h1>
+            <!-- <h1>
                 Créez votre espace business en quelques étapes, simples
                 et rejoignez notre communauté prospère. <br>
                 Votre aventure avec nous commence ici.
+            </h1> -->
+            <h1>
+                Forgez votre univers commercial en seulement quelques étapes stratégiques.
             </h1>
 
             <p class="slogan">
-                Accéder à votre espace, ajouter, modifier et supprimer des articles, ainsi que gérer tous les aspects de votre espace en toute simplicité.
+                Accédez, ajoutez, modifiez, supprimez et gérez facilement votre espace en toute simplicité.
             </p>
-
-            <div class="boutons">
-                <button class="call-to-action">
-                    Accéder à votre espace
-                </button>
-
-                <p class="explore">
-                    <span class="material-icons">
-                        keyboard_arrow_right
-                    </span>
-                    <span>Contactez notre équipe</span>
-                </p>
+            <!-- <p class="slogan">
+                Accéder à votre espace, ajouter, modifier et supprimer des articles, ainsi que gérer tous les aspects de votre espace en toute simplicité.
+            </p> -->
+            <div class="pricing" (click)="scrollId('tarif')">
+                voir les tarifs
             </div>
 
-
-
         </div>
-
-    </div>
-
-    <!-- avantages -->
-    <div class="items">
-        <p class="header">Recommandé</p>
-        <h3>
-            Découvrez les avantages exclusifs de posséder votre espace de vente en ligne chez WENZE
-            : une expérience de gestion simplifiée,
-            une visibilité accrue et une audience sur
-            les réseaux à portée de main.
-        </h3>
 
         <div class="flex-items">
 
             <div class="card">
-                <h3 class="card-header">- Gérer sa boutique en ligne</h3>
+                <h3 class="card-header">
+                    Gérer sa boutique en ligne
+                </h3>
                 <p class="card-body">
-                    Avec <b>WENZE</b>,
-                    la gestion de votre boutique en
-                    ligne devient un jeu d'enfant. <br>
-                    Notre interface intuitive et
-                    conviviale vous permet de
-                    télécharger vos produits,
-                    de les organiser en catégories
-                    et de personnaliser votre
-                    espace en fonction de votre
-                    marque. <br>
-                    Vous pouvez facilement ajouter des
-                    descriptions, des images attrayantes
-                    et des détails de prix. <br>
-                    Plus besoin d'être un expert
-                    technique pour offrir une expérience
-                    d'achat exceptionnelle à vos clients.
-
+                    Simplifiez la gestion de votre boutique
+                    en ligne grâce à notre interface conviviale.
+                    Téléchargez, organisez et personnalisez vos
+                    produits sans expertise technique.
+                    Offrez une expérience d'achat exceptionnelle
+                    à vos clients avec des descriptions, images
+                    et détails de prix facilement ajoutés.
                 </p>
             </div>
             <div class="card">
-                <h3 class="card-header">- Une audience sur les réseaux </h3>
+                <h3 class="card-header">Une audience sur les réseaux </h3>
                 <p class="card-body">
-                    Les médias sociaux jouent un
-                    rôle essentiel dans la promotion
-                    d'une entreprise en ligne.
-                    En intégrant <b>WENZE</b>,
-                    vous bénéficiez de notre présence
-                    sur les réseaux sociaux et pouvez
-                    tirer parti de nos campagnes de
-                    marketing numérique pour atteindre
-                    une audience plus large. <br>
-                    Vous pouvez également partager
-                    vos produits directement sur vos
-                    propres plateformes,
-                    augmentant ainsi votre portée et
-                    votre engagement.
+                    Profitez de notre visibilité sur les
+                    réseaux sociaux et de nos campagnes
+                    de marketing numérique pour toucher
+                    une audience étendue. Partagez vos
+                    produits sur vos propres plateformes,
+                    accroissant ainsi votre portée et
+                    engagement. Notre soutien vous ouvre
+                    des opportunités pour élargir votre
+                    présence en ligne.
                 </p>
             </div>
             <div class="card">
-                <h3 class="card-header">- Suivre ses ventes à temps réel</h3>
+                <h3 class="card-header">Suivre ses ventes à temps réel</h3>
                 <p class="card-body">
-                    La visibilité en temps réel sur
-                    vos performances est essentielle
-                    pour prendre des décisions éclairées. <br>
-                    Grâce à <b>WENZE</b>,
-                    vous avez accès à des tableaux de bord
-                    détaillés qui vous fournissent des
-                    informations précieuses sur vos ventes,
-                    vos stocks et vos tendances de produits.
-                    Cette transparence vous aide à ajuster
-                    votre stratégie de vente et à maximiser
-                    vos bénéfices.
+                    Accédez à des tableaux de bord
+                    détaillés offrant des informations
+                    cruciales sur vos ventes, stocks et
+                    tendances de produits. Cette
+                    transparence facilite l'ajustement
+                    de votre stratégie de vente pour
+                    maximiser vos bénéfices.
                 </p>
             </div>
             <div class="card">
-                <h3 class="card-header">- Accroître sa visibilité</h3>
+                <h3 class="card-header">Accroître sa visibilité</h3>
                 <p class="card-body">
-                    En tant que boutique <b>WENZE</b>,
-                    vous rejoignez une plateforme déjà
-                    établie et fréquentée par des clients avides
-                    de découvertes. Notre site attire un large public,
-                    vous offrant ainsi une visibilité accrue pour vos
-                    produits. De plus, nos outils de marketing et de
-                    promotion intégrés vous permettent de mettre en
-                    avant vos offres spéciales et de
-                    toucher de nouveaux clients potentiels
+                    Bénéficiez d'une visibilité étendue
+                    pour vos produits grâce à notre site
+                    attirant un large public. Utilisez nos
+                    outils de marketing intégrés pour mettre
+                    en avant vos offres spéciales, toucher de
+                    nouveaux clients potentiels et optimiser
+                    votre présence en ligne.
                 </p>
             </div>
 
 
         </div>
+
     </div>
 
     <!-- details -->
@@ -169,52 +139,55 @@
         <div class="container">
             <p class="header">#SoutenonsNosPME</p>
             <h2>
-                Développez et entretenez votre activité avec nos ressources et formations.
+                Développez et entretenez votre activité avec nos ressources et nos conseiller.
             </h2>
 
 
             <div class="formations">
                 <div class="card">
+                    <p class="spin">01</p>
+
+                    <p class="title">
+                        Accompagnement
+                    </p>
                     <p>
-                        Ces formations abordent <br>
-                        les principes essentiels du <br>
-                        marketing numérique.
+                        personnalisé en se basant sur les
+                        données des tableaux de bord,
+                        optimisant ainsi l'expérience client.
                     </p>
-                    <p class="explore">
-                        <span class="material-icons">
-                            keyboard_arrow_right
-                        </span>
-                        <span>Regarder maintenant</span>
-                    </p>
+
                 </div>
 
                 <div class="card">
+                    <p class="spin">02</p>
+                    <p class="title">
+                        Assistance
+                    </p>
                     <p>
-                        Explorez les ressources gratuites <br>
-                        dédiées à la croissance de votre <br>
-                        petite entreprise.
+                        précieuse à la prise de décision
+                        en utilisant des tableaux de bord
+                        détaillés, facilitant ainsi des
+                        choix éclairés et stratégiques.
                     </p>
-                    <p class="explore">
-                        <span class="material-icons">
-                            keyboard_arrow_right
-                        </span>
-                        <span>Lire suite</span>
-                    </p>
+
                 </div>
 
                 <div class="card">
+                    <p class="spin">03</p>
+                    <p class="title">
+                        Visualisation
+                    </p>
                     <p>
-                        Profitez d'un plan sur mesure pour <br>
-                        atteindre vos objectifs <br>
-                        en marketing.
+                        en temps réel offre
+                        une vue instantanée et dynamique des
+                        données, facilitant ainsi une
+                        compréhension rapide et réactive de
+                        la situation.
                     </p>
-                    <p class="explore">
-                        <span class="material-icons">
-                            keyboard_arrow_right
-                        </span>
-                        <span>En savoir plus</span>
-                    </p>
+
                 </div>
+
+
 
 
 
@@ -223,12 +196,12 @@
     </div>
 
     <!-- Tarifs -->
-    <div class="tarifs">
+    <div class="tarifs" id="tarif">
         <p class="header">Tarification</p>
 
         <p class="paint">TARIFICATION</p>
 
-        <p class="intro">
+        <p class="intro" >
             Il est important de noter que nos tarifications de
             maintenance ne concernent pas l'espace boutique en lui-même,
             car chez <b>WENZE</b>, l'accès à l'espace boutique est totalement
@@ -240,50 +213,29 @@
             une expérience optimale pour vos clients.
         </p>
 
-        <div class="tarifs-element">
+        <div class="subscriptions">
 
-            <div class="tarif">
-                <h2>Basique</h2>
-                <p>
-                    Si votre volume de ventes varie de <b>0</b> à <b>99</b> par mois,
-                    notre tarification basique de <b>10 $</b>
-                    vous assure une maintenance en douceur de votre boutique.
-                    Nous nous engageons à vous offrir un service de qualité
-                    pour vous permettre de
-                    vous concentrer sur la croissance de votre activité.
+            <div class="subscription" *ngFor="let sub of subscription; let i = index">
+
+                <p class="subs-title">{{ sub }}</p>
+
+                <p class="price">${{ prices[i] }} <sup>mois</sup></p>
+
+                <p class="text" *ngFor="let text of subs[i]">
+                    <span class="material-symbols-outlined">
+                        radio_button_checked
+                    </span>
+                    <span>
+                        {{ text }}
+                    </span>
                 </p>
+
+                <div class="call-to-action">
+                    Souscrire
+                </div>
+
             </div>
-            <div class="tarif">
-                <h2>Production</h2>
-                <p>
-                    Si vos ventes commencent à s'épanouir avec un volume
-                    mensuel de <b>100</b> à <b>449</b> ventes,
-                    notre tarification de <b>25 $</b> par mois vous
-                    offre une maintenance étendue pour gérer
-                    l'augmentation du trafic et des commandes.
-                </p>
-            </div>
-            <div class="tarif">
-                <h2>Avancé</h2>
-                <p>
-                    Lorsque votre boutique atteint le niveau avancé
-                    avec <b>250</b> à <b>699</b> ventes mensuelles,
-                    notre tarification de <b>50 $</b>  par mois vous
-                    offre un soutien approfondi pour maintenir
-                    une expérience client exceptionnelle et pour
-                    faire face à la croissance continue.
-                </p>
-            </div>
-            <div class="tarif">
-                <h2>Entreprise</h2>
-                <p>
-                    Pour les entreprises prospères avec plus de <b>699</b> ventes
-                    par mois, notre équipe dédiée travaillera avec vous
-                    pour créer un plan
-                    personnalisé répondant à vos besoins spécifiques.
-                </p>
-                <button class="call-to-action">Contactez-nous</button>
-            </div>
+
 
         </div>
 
@@ -317,7 +269,7 @@
             <p>Tarification</p>
         </div>
 
-        <p>Tous droits  réservés &copy; <b>2023</b></p>
+        <p>Tous droits  réservés &copy; <b>2024</b></p>
     </footer>
 
 </div>

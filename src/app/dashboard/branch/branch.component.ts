@@ -30,10 +30,10 @@ export class BranchComponent {
     var access = this.secureStorage.getItem("has_access")
 
     var has_access = JSON.parse(access).has_access
-
-    if (!has_access) {
-      this.router.navigate(["/dashboard"])
-    }
+    // Decommenter lors de la production
+    // if (!has_access) {
+    //   this.router.navigate(["/dashboard"])
+    // }
 
     const params = this.params.snapshot.queryParams
 

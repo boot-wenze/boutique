@@ -37,7 +37,9 @@ export class ProductComponent {
   isLoading: boolean = false
   details : any
   disponible : any
-  getBranchId : any
+  getBranchId: any
+
+  accountType: any
 
   constructor(
     private websocketService: WebsocketService,
@@ -52,34 +54,70 @@ export class ProductComponent {
 
     this.isLoading = true
 
+    const api = this.api.getInfo()
+
+    this.accountType = api.bness.group
+
+
     this.loading()
 
 
     this.getBranchId = this.params.snapshot.queryParams['id']
 
-    this.api.get(`add_product?id=${this.getBranchId}`)
-    .subscribe((res: any)=> {
-      if(res.message === "added to the queue"){
 
-        this.websocketService.connect(`ws://${environment.ws_url}ws/items/${this.getBranchId}`);
+    if (this.accountType !== "RESTAURANT") {
 
-        this.websocketService.getMessages().subscribe((message) => {
-          this.user = this.api.getInfo()
-          // console.log(message.items);
-          this.datasource = message.items
-          this.categorie = this.user.bness.category
-          this.categorie = this.categorie.split(' ')
-          this.categorie.unshift("Tous")
-          this.active = "Tous"
+      this.api.get(`add_product?id=${this.getBranchId}`)
+      .subscribe((res: any)=> {
+        if(res.message === "added to the queue"){
 
-          this.data = this.datasource
+          this.websocketService.connect(`ws://${environment.ws_url}ws/items/${this.getBranchId}`);
 
-          this.removeErrors()
+          this.websocketService.getMessages().subscribe((message) => {
+            this.user = this.api.getInfo()
+            // console.log(message.items);
+            this.datasource = message.items
+            this.categorie = this.user.bness.category
+            this.categorie = this.categorie.split(' ')
+            this.categorie.unshift("Tous")
+            this.active = "Tous"
 
-        })
+            this.data = this.datasource
+
+            this.removeErrors()
+
+          })
+        }
       }
+      )
+    } else {
+      this.api.get(`add_resto_product?id=${this.getBranchId}`)
+        .subscribe((res: any) => {
+
+          if (res.message === "added to the queue") {
+            this.websocketService.connect(`ws://${environment.ws_url}ws/resto/${this.getBranchId}`);
+
+            this.websocketService.getMessages().subscribe((message) => {
+
+              this.user = this.api.getInfo()
+
+              this.datasource = JSON.parse(message.data)
+              // console.log(this.datasource);
+
+              this.categorie = this.user.bness.category
+              this.categorie = this.categorie.split(' ')
+              this.categorie.unshift("Tous")
+              this.active = "Tous"
+
+              this.data = this.datasource
+
+              this.removeErrors()
+
+            })
+          }
+
+      })
     }
-    )
 
 
   }
@@ -91,14 +129,18 @@ export class ProductComponent {
 
     } else {
 
-      this.details = this.data[0].stock[0]
-      this.disponible = this.data[0].disponible[0]
-
-      this.activeProduct = this.data[0].id
-      this.editProduct(this.activeProduct)
-
       this.isLoading = false
+      if (this.accountType !== "RESTAURANT") {
+        this.details = this.data[0].stock[0]
+        this.disponible = this.data[0].disponible[0]
+
+        this.activeProduct = this.data[0].id
+      } else {
+        this.activeProduct = this.data[0].product_id
+      }
+      this.editProduct(this.activeProduct)
       this.loading()
+
     }
   }
 
@@ -115,16 +157,23 @@ export class ProductComponent {
 
   editProduct = (id: any) => {
     this.activeProduct = id
-    this.product = this.data.find(item => item.id === id)
-    this.myImage = this.product.photos[0]
+    if (this.accountType !== "RESTAURANT") {
+      this.product = this.data.find(item => item.id === id)
+      this.myImage = this.product.photos[0]
+    } else {
+      this.product = this.data.find(item => item.product_id === id)
+      this.myImage = this.product.photo
+    }
     this.changeImage(this.myImage)
   }
 
   changeImage = (id: any, index : number = 0) => {
     this.myImage = id
     this.activeImage = id
-    this.details = this.data[0].stock[index]
-    this.disponible = this.data[0].disponible[index]
+    if (this.accountType !== "RESTAURANT") {
+      this.details = this.data[0].stock[index]
+      this.disponible = this.data[0].disponible[index]
+    }
 
   }
   searchOrder = () => {

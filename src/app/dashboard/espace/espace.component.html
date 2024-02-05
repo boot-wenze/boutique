@@ -4,12 +4,12 @@
 
     <div class="container" *ngIf="data">
 
-        <p class="logo" *ngIf="has_access" [routerLink]="['/']" >{{data.bness.name}}</p>
+        <p class="logo" *ngIf="!has_access" [routerLink]="['/']" >{{data.bness.name}}</p>
 
-        <!-- <p class="branch">Branche(s)</p> -->
+        <p class="branch" *ngIf="!has_access" >Branche(s)</p>
 
 
-        <div class="branchs" *ngIf="has_access">
+        <div class="branchs" *ngIf="!has_access">
 
             <div class="item"
                 [routerLink]="['/dashboard/branch']"
@@ -52,14 +52,21 @@
 
         </div>
 
-        <div class="plans">
+        <div class="plans" *ngIf="has_access">
             <p class="sub-title" >Trouver vos plans</p>
 
-            <p class="title" [routerLink]="['/']">Trouver le <span>Bon Plan</span> pour <span>{{data.bness.name}}</span></p>
+            <div class="all">
+                <p></p>
+                <p class="title" [routerLink]="['/']">Trouver le <span>Bon Plan</span> pour <span>{{data.bness.name}}</span></p>
+                <p (click)="logOut()" >Se deconnecter</p>
+            </div>
 
             <div class="subscriptions">
 
-                <div class="subscription" *ngFor="let sub of subscription; let i = index">
+                <div
+                    class="subscription"
+                    *ngFor="let sub of subscription; let i = index"
+                >
 
                     <p class="subs-title">{{ sub }}</p>
 
@@ -74,7 +81,14 @@
                         </span>
                     </p>
 
-                    <div class="call-to-action">
+                    <div
+                        class="call-to-action"
+                        [routerLink]="['/dashboard/plan']"
+                        [queryParams]="{
+                            subscription: sub,
+                            price: prices[i]
+                        }"
+                    >
                         Souscrire
                     </div>
 

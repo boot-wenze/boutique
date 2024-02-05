@@ -49,6 +49,20 @@
                         <textarea [(ngModel)]="description"></textarea>
 
                     </div>
+                    <div class="form-group" *ngIf="accountType === 'RESTAURANT'">
+                        <p>
+                            Mes Boissons
+                        </p>
+                        <textarea [(ngModel)]="mes_boissons" placeholder="une boisson par ligne"></textarea>
+
+                    </div>
+                    <div class="form-group" *ngIf="accountType === 'RESTAURANT'">
+                        <p>
+                            Mes sauces
+                        </p>
+                        <textarea [(ngModel)]="mes_sauces" placeholder="une sauce par ligne"></textarea>
+
+                    </div>
 
                 </div>
 
@@ -61,11 +75,11 @@
 
                     <div class="pictures">
                         <input type="file" [(ngModel)]="pic1"  (change)="onChangePic('file1')" #file1>
-                        <input type="file" [(ngModel)]="pic2"  (change)="onChangePic('file2')" #file2>
-                        <input type="file" [(ngModel)]="pic3"  (change)="onChangePic('file3')" #file3>
+                        <input type="file" [(ngModel)]="pic2" *ngIf="accountType !== 'RESTAURANT'"  (change)="onChangePic('file2')" #file2>
+                        <input type="file" [(ngModel)]="pic3" *ngIf="accountType !== 'RESTAURANT'" (change)="onChangePic('file3')" #file3>
                         <img [src]="pic1" (click)="myPhoto('file1')" alt="">
-                        <img [src]="pic2" (click)="myPhoto('file2')" alt="">
-                        <img [src]="pic3" (click)="myPhoto('file3')" alt="">
+                        <img [src]="pic2" *ngIf="accountType !== 'RESTAURANT'" (click)="myPhoto('file2')" alt="">
+                        <img [src]="pic3" *ngIf="accountType !== 'RESTAURANT'" (click)="myPhoto('file3')" alt="">
                     </div>
 
                 </div>
@@ -76,12 +90,12 @@
 
                 <div class="cadre">
 
-                    <div class="same-price">
+                    <div class="same-price" *ngIf="accountType !== 'RESTAURANT'">
                         <input type="checkbox" [(ngModel)]="checkbox">
                         <span class="info-d">C'est un même produit, pris dans différents façade</span>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" *ngIf="accountType == 'BOUTIQUE'">
                         <p >
                             Destiné aux
                         </p>
@@ -95,29 +109,33 @@
                         <p >
                             Prix
                         </p>
-                        <input type="number" class="form-control" [(ngModel)]="price">
+                        <input type="{{accountType !== 'RESTAURANT' ? 'number' : 'text'}}" class="form-control" [(ngModel)]="price">
+                        <p class="info"> {{ accountType !== 'RESTAURANT' ? '' : "Si vous avez différents tailles, veuillez espacés l'insertion des prix, exemple : 15 20 25 30" }} </p>
                     </div>
 
                     <div class="form-group">
                         <p >
-                            Taille(s) & Nombre(s) ( Photo 1 )
+                           {{ accountType !== 'RESTAURANT' ? "Taille(s) & Nombre(s) ( Photo 1 )" : "TAILLE" }}
                         </p>
                         <input type="text" class="form-control" [(ngModel)]="size1" >
-                        <p class="info">Taille:Nombre</p>
+                        <p class="info"> {{ accountType !== 'RESTAURANT' ? 'Taille:Nombre' : "PETITE  MOYENNE  GRANDE  FAMILLE" }} </p>
                     </div>
-                    <div class="form-group" *ngIf="!checkbox">
-                        <p >
-                            Taille(s) & Nombre(s) ( Photo 2 )
-                        </p>
-                        <input type="text" class="form-control" [(ngModel)]="size2" >
-                        <p class="info">Taille:Nombre</p>
-                    </div>
-                    <div class="form-group" *ngIf="!checkbox">
-                        <p >
-                            Taille(s) & Nombre(s) ( Photo 3 )
-                        </p>
-                        <input type="text" class="form-control" [(ngModel)]="size3" >
-                        <p class="info">Taille:Nombre</p>
+                    <div *ngIf="accountType !== 'RESTAURANT'">
+                        <div class="form-group" *ngIf="!checkbox">
+                            <p >
+                                Taille(s) & Nombre(s) ( Photo 2 )
+                            </p>
+                            <input type="text" class="form-control" [(ngModel)]="size2" >
+                            <p class="info">Taille:Nombre</p>
+                        </div>
+                        <div class="form-group" *ngIf="!checkbox">
+                            <p >
+                                Taille(s) & Nombre(s) ( Photo 3 )
+                            </p>
+                            <input type="text" class="form-control" [(ngModel)]="size3" >
+                            <p class="info">Taille:Nombre</p>
+                        </div>
+
                     </div>
 
                     <div class="form-group">
@@ -157,7 +175,7 @@
 
             <div class="images">
                 <img [src]="myImage" alt="" class="initial">
-                <div class="slider">
+                <div class="slider" *ngIf="accountType !== 'RESTAURANT'">
                     <img [src]="photo" (click)="changeImage(photo)" [ngClass]="{'active-photo': activeImage === photo }" *ngFor="let photo of photos" alt="" class="slide-photo">
                 </div>
             </div>
@@ -167,7 +185,7 @@
                 <p *ngIf="price >= 0">{{ currency === "USD" ? "$" : "FC" }} {{ price }}</p>
             </div>
 
-            <div class="size" *ngIf="user.bness.group === 'BOUTIQUE'">
+            <div class="size" *ngIf="accountType === 'BOUTIQUE'">
                 <p>Taille</p>
 
                 <div class="my-size">

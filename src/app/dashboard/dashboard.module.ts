@@ -8,6 +8,7 @@ import { EspaceComponent } from './espace/espace.component';
 // import { BranchComponent } from './branch/branch.component';
 import { FormsModule } from '@angular/forms';
 import { CreateBranchComponent } from './create-branch/create-branch.component';
+// import { PlanComponent } from './plan/plan.component';
 
 
 
@@ -15,7 +16,8 @@ import { CreateBranchComponent } from './create-branch/create-branch.component';
   declarations: [
     DashboardComponent,
     EspaceComponent,
-    CreateBranchComponent
+    CreateBranchComponent,
+    // PlanComponent
     // BranchComponent,
   ],
   imports: [

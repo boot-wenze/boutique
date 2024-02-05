@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { EspaceComponent } from './espace/espace.component';
 import { CreateBranchComponent } from './create-branch/create-branch.component';
+import { PlanComponent } from './plan/plan.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: 'create-branch',
         component: CreateBranchComponent
+      },
+      {
+        path: 'plan',
+        component: PlanComponent
       },
       {
         path: 'branch',

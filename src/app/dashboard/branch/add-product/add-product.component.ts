@@ -37,6 +37,8 @@ export class AddProductComponent {
   size2 : any
   size3 : any
   price : any
+  mes_boissons : any
+  mes_sauces : any
   currency : any = "USD"
   destinated_to : any = "NEUTRE"
   description : any
@@ -47,6 +49,7 @@ export class AddProductComponent {
   sizeHolder: any[] = [40, 41, 42]
   isLoading: boolean = false
   branch_id: string = ""
+  accountType : any
   for : any[] = [
     "HOMME", "FEMME", "ENFANTS", "NEUTRE"
   ]
@@ -68,7 +71,8 @@ export class AddProductComponent {
 
     this.branch_id = this.params.snapshot.queryParams["id"]
 
-    // console.log(this.branch_id)
+    // console.log(this.user.bness.group)
+    this.accountType = this.user.bness.group
 
     this.photos.push(this.pic1)
     this.photos.push(this.pic2)
@@ -115,10 +119,66 @@ export class AddProductComponent {
 
   onSubmitProduct = () => {
 
-    if (!this.pic1.toString().startsWith("https://icon-library.com/") &&
-      !this.pic2.toString().startsWith("https://icon-library.com/") &&
-      !this.pic3.toString().startsWith("https://icon-library.com/")
-    ) {
+
+    if (this.accountType !== 'RESTAURANT') {
+      if (!this.pic1.toString().startsWith("https://icon-library.com/") &&
+        !this.pic2.toString().startsWith("https://icon-library.com/") &&
+        !this.pic3.toString().startsWith("https://icon-library.com/")
+      ) {
+
+        const result = this.discount === true ? this.percent.toString() : "0"
+
+        const data = new FormData()
+
+        data.append('branch_id', this.branch_id)
+        data.append('name', this.name)
+        data.append('category', this.category)
+        data.append('description', this.description)
+        data.append('same_product', this.checkbox === true ? 'Oui' : 'No')
+        data.append('size1', this.size1)
+        data.append('size2', this.size2)
+        data.append('size3', this.size3)
+        data.append('price', this.price)
+        data.append('currency', this.currency)
+        data.append('destinated_to', this.user.bness.group === "BOUTIQUE" ? this.destinated_to : "NEUTRE")
+        data.append('discount',  this.discount === true ? 'Oui' : 'No' )
+        data.append('discount_percentage', result)
+        data.append('photo1', this.file1.nativeElement.files[0])
+        data.append('photo2', this.file2.nativeElement.files[0])
+        data.append('photo3', this.file3.nativeElement.files[0])
+
+        Swal.fire({
+          text: "Vous êtes sur le point d'ajouter un article",
+        }).then((res) => {
+          if (res.isConfirmed) {
+
+            this.isLoading = true
+            this.loading()
+
+            this.api.post('add_product', data)
+            .subscribe((res: any) => {
+              this.isLoading = false
+              this.loading()
+              Swal.fire({
+                text : "Votre téléversement d'articles a été pris en compte et sera traité dans les prochaines minutes."
+              }).then((resp) => {
+                window.location.reload()
+              })
+
+            })
+
+          }
+        })
+
+      } else {
+        Swal.fire({
+          title: "Fichier manquant !",
+          icon: 'warning',
+          text: "Vous pouvez téléverser qu'à partir de 3 fichiers"
+        })
+      }
+
+    } else {
 
       const result = this.discount === true ? this.percent.toString() : "0"
 
@@ -128,49 +188,41 @@ export class AddProductComponent {
       data.append('name', this.name)
       data.append('category', this.category)
       data.append('description', this.description)
-      data.append('same_product', this.checkbox === true ? 'Oui' : 'No')
-      data.append('size1', this.size1)
-      data.append('size2', this.size2)
-      data.append('size3', this.size3)
+      data.append('mes_boissons', this.mes_boissons)
+      data.append('mes_sauces', this.mes_sauces)
+      data.append('size', this.size1)
       data.append('price', this.price)
       data.append('currency', this.currency)
-      data.append('destinated_to', this.destinated_to)
       data.append('discount',  this.discount === true ? 'Oui' : 'No' )
       data.append('discount_percentage', result)
-      data.append('photo1', this.file1.nativeElement.files[0])
-      data.append('photo2', this.file2.nativeElement.files[0])
-      data.append('photo3', this.file3.nativeElement.files[0])
+      data.append('photo', this.file1.nativeElement.files[0])
 
       Swal.fire({
-        text: "Vous êtes sur le point d'ajouter un article",
-      }).then((res) => {
-        if (res.isConfirmed) {
+          text: "Vous êtes sur le point d'ajouter un article",
+        }).then((res) => {
+          if (res.isConfirmed) {
 
-          this.isLoading = true
-          this.loading()
-
-          this.api.post('add_product', data)
-          .subscribe((res: any) => {
-            this.isLoading = false
+            this.isLoading = true
             this.loading()
-            Swal.fire({
-              text : "Votre téléversement d'articles a été pris en compte et sera traité dans les prochaines minutes."
-            }).then((resp) => {
-              window.location.reload()
+
+            this.api.post('add_resto_product', data)
+            .subscribe((res: any) => {
+              this.isLoading = false
+              this.loading()
+              Swal.fire({
+                text : "Votre téléversement d'articles a été pris en compte et sera traité dans les prochaines minutes."
+              }).then((resp) => {
+                window.location.reload()
+              })
+
             })
 
-          })
+          }
+        })
 
-        }
-      })
-
-    } else {
-      Swal.fire({
-        title: "Fichier manquant !",
-        icon: 'warning',
-        text: "Vous pouvez téléverser qu'à partir de 3 fichiers"
-      })
     }
+
+
 
 
   }

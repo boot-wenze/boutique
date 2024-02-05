@@ -13,6 +13,7 @@
             authentiques dans l'interface dédiée.
             Les documents requis sont :
         </p>
+
         <ol>
             <li>Nom du business</li>
             <li>Type de business</li>
@@ -41,28 +42,76 @@
         <form ngNativeValidate (submit)="submitFiles()">
 
             <div class="form-group">
-                <input type="text" [(ngModel)]="name" name="name" id="name" class="form-control" placeholder="Nom du business" required>
+                <input type="text"
+                    [(ngModel)]="name"
+                    name="name"
+                    id="name"
+                    class="form-control"
+                    placeholder="Nom du business"
+                    required
+                >
             </div>
+
             <div class="form-group">
                 <select name="type" id="type" [(ngModel)]="type" required>
                     <option value="" selected disabled>Type</option>
                     <option value="SUPERMARCHE" >Super marché</option>
                     <option value="WENZE" >Wenze</option>
                     <option value="BOUTIQUE" >Boutique</option>
+                    <option value="RESTAURANT" >Restaurant</option>
                 </select>
             </div>
+
             <div class="form-group">
-                <input type="text" id="category" name="category" [(ngModel)]="category" class="form-control" placeholder="Catégorie" required maxlength="255">
+                <input
+                    type="text"
+                    id="category"
+                    name="category"
+                    [(ngModel)]="category"
+                    class="form-control"
+                    placeholder="Catégorie"
+                    required
+                    maxlength="255"
+                >
                 <p class="info">e.g: Chaussure Veste Pantalon Chemise Sandale</p>
             </div>
+
             <div class="form-group">
-                <input type="text" id="imma" name="immatriculation" [(ngModel)]="immatriculation" class="form-control" placeholder="Immatriculation" required>
+                <input
+                    type="text"
+                    id="imma"
+                    name="immatriculation"
+                    [(ngModel)]="immatriculation"
+                    class="form-control"
+                    placeholder="Immatriculation"
+                    required
+                >
             </div>
+
             <div class="form-group">
-                <input type="email" id="email" name="email" [(ngModel)]="email" class="form-control" placeholder="E-mail" required>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    [(ngModel)]="email"
+                    class="form-control"
+                    placeholder="E-mail"
+                    required
+                >
             </div>
+
             <div class="form-group">
-                <input type="text" id="phone" name="phone" [(ngModel)]="phone" class="form-control" placeholder="Télephone" maxlength="10" minlength="10" required>
+                <input
+                    type="text"
+                    id="phone"
+                    name="phone"
+                    [(ngModel)]="phone"
+                    class="form-control"
+                    placeholder="Télephone"
+                    maxlength="10"
+                    minlength="10"
+                    required
+                >
             </div>
             <!-- <div class="file">
                 <label for="">Preuve d'exploitation de la boutique : </label>

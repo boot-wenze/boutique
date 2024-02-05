@@ -22,7 +22,10 @@ export class EspaceComponent {
     "business",
   ]
   subs = [
-    ["Branche Principale incluse", "Frais Logistique de Livraison à 5$"],
+    [
+      "Branche Principale incluse",
+      "Frais Logistique de 5$ à chaque Livraison"
+    ],
     [
       "Branche Principale incluse",
       "Frais Logistiues Offerts",
@@ -80,6 +83,11 @@ export class EspaceComponent {
 
     })
 
+  }
+
+  logOut = () => {
+    this.secureStorage.clear()
+    window.location.reload()
   }
 
 }

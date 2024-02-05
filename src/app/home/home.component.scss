@@ -8,20 +8,26 @@
     position: fixed;
     inset: 0;
     overflow-y: scroll;
+    color: white;
+    background: black;
 }
 
 .navbar{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #f2f2f2;
-    padding: 30px;
-    position: sticky;
-    inset: 0 0 auto 0;
+    padding: 10px;
     z-index: 100;
-    height: 2em;
+    width: 100%;
+    height: fit-content;
+    position: fixed;
+    background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), transparent;
+    inset: 0 0 auto 0;
 
     .brand{
+        cursor: pointer;
+        font-weight: bold;
+        font-family: $ubuntu;
         img{
             height: 3em;
             width: 3em;
@@ -54,6 +60,7 @@
             border-radius: 1em;
             padding: .35em 1em;
             color: white;
+            border: 1px solid #202020;
         }
     }
 }
@@ -66,7 +73,7 @@
     top: 17%;
     right: -12%;
     z-index: 9999;
-    background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5));
+    background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), #202120;
     border-radius: 4px;
     transition: all 1s ease-in-out;
     display: block;
@@ -103,12 +110,11 @@
 
 
 .showcase{
-    width: 100%;
-    height: 100vh;
+    padding: 20%;
     position: relative;
     font-family: $font-family;
-    background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url("https://images.pexels.com/photos/6995145/pexels-photo-6995145.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-    background-size: 100%;
+    background: rgb(8,100,195);
+    background: radial-gradient(at bottom, rgba(8,100,195,1) 0%, rgba(0,0,0,1) 53%);
     .boutique{
         position: absolute;
         transform: translate(-50%, -50%);
@@ -120,33 +126,54 @@
             line-height: 2em;
             margin: 0 auto;
         }
-        .slogan{
-            width: 80%;
+        h1{
+            font-size: 35px;
+            font-family: $ubuntu;
+            margin: 1.5em auto;
         }
-        .boutons{
+        .slogan{
             width: 70%;
+            color: gray;
+            font-size: 14px;
+        }
+        .pricing{
             margin: 2em auto;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
+            background: black;
+            border-radius: 8px;
+            padding: 10px;
+            width: fit-content;
+            color: white;
+            cursor: pointer;
+        }
+    }
 
-            .explore{
-                display: flex;
-                align-items: center;
-                gap: 0 .5em;
-                cursor: pointer;
-
-                & > span:first-child{
-                    border: 1px solid white;
-                    border-radius: 50%;
-
-                    &:hover{
-                        background-color: $green;
-                    }
-                }
+    .flex-items{
+        width: 80%;
+        margin: auto;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 90%;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1em;
+        .card{
+            width: 23%;
+            padding: 1em;
+            border-radius: 8px;
+            background: black;
+            border: 1px solid #202120;
+            &-header{
+                text-align: center;
+                font-family: $ubuntu;
+                margin-bottom: 2em;
             }
-
+            &-body{
+                text-align: center;
+                color: gray;
+                line-height: 30px;
+            }
         }
     }
 
@@ -154,58 +181,10 @@
 .items, .details, .footer, .tarifs{
     padding: 20px;
 }
-.items{
-    width: 85%;
-    margin-left: auto;
-    margin-bottom: 5em;
-    p{
-        margin: 2em 0 0 0;
-    }
-
-    h3{
-        margin: 0 0 2.5em 0;
-        width: 50%;
-    }
-
-    .flex-items{
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: .3em 1em;
-        .card{
-            width: 25%;
-            &-header{
-                font-size: 16px;
-                margin-bottom: .5em;
-                color: $green;
-                font-weight: bold;
-                width: 100%;
-            }
-
-            &-body{
-                border-radius: 4px;
-                background-color: #f2f2f2;
-                color: black;
-                padding: .5em;
-                line-height: 2em;
-                cursor: pointer;
-                & > b{
-                    color: $green;
-                }
-
-                &:hover{
-                    padding: .5em;
-                    line-height: 2em;
-                    border: 1px solid $green;
-                }
-            }
-        }
-    }
-}
 
 
 .details{
-    background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url("../../assets/dab.jpg");
+    margin-top: 9em;
     padding: 2%;
     object-fit: fill;
     background-size: 100% 100%;
@@ -221,6 +200,7 @@
         h2{
             width: 40%;
             margin-bottom: 5em;
+            font-family: $ubuntu;
         }
 
         .formations{
@@ -228,30 +208,23 @@
             align-items: flex-start;
             gap: 2em;
             .card{
-                background-color: #ffffff;
-                border-radius: 4px;
+                border-radius: 8px;
                 padding: 1em;
-                color: black;
+                border: 1px solid #202120;
+                width: 30%;
+                color: gray;
                 p:first-child{
-                    font-size: 1.25em;
-                    line-height: 1.5em;
+                    font-size: 2.3em;
                     font-weight: bold;
+                    margin-bottom: 3em;
+                    color: #202020;
                 }
-                .explore{
-                    display: flex;
-                    align-items: center;
-                    gap: 0 .5em;
-                    cursor: pointer;
+                p.title{
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: white;
+                }
 
-                    & > span:first-child{
-                        border: 1px solid black;
-                        border-radius: 50%;
-                        &:hover{
-                            background-color: black;
-                            color: white;
-                        }
-                    }
-                }
             }
         }
     }
@@ -259,68 +232,101 @@
 .tarifs{
     width: 90%;
     margin-left: auto;
-    margin-top: 4em;
+    margin-top: 8em;
     position: relative;
 
     .header{
         font-weight: bold;
-        text-decoration: underline;
+        text-align: center;
+        font-size: 1.55em;
+        display: none;
     }
 
     .paint{
         position: absolute;
         transform: translate(-50%, -50%);
-        top: 15%;
+        top: 2%;
         left: 40%;
         z-index: -200;
         line-height: 0;
         font-size: 10.625em;
         font-weight: 900;
-        color: #f2f2f2;
+        color: #202020;
     }
     .intro{
-        margin: 4em auto;
+        margin: 10em auto;
         b{
             color: $green;
         }
     }
 
-    &-element{
-        width: 100%;
+    .subscriptions{
+        margin: 5em auto;
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        gap: 0 2em;
-        .tarif{
-            padding: .5em;
-            text-align: center;
-            p{
-                line-height: 2.5em;
-                b{
-                    color: $green;
+        gap: 1em 3em;
+        box-sizing: border-box;
+        .subscription{
+            border-radius: 8px;
+            border: 1px solid #202020;
+            padding: 1em;
+            width: 25%;
+            text-align: left;
+            height: 32em;
+            position: relative;
+            &:hover{
+                box-shadow: $green 0px 0px 0px 3px;
+                cursor: pointer;
+            }
+            &:nth-child(2){
+                background-color: #202120;
+                color: $green;
+                border: none;
+                .call-to-action{
+                    background: $green;
+                    color: white;
+                    font-weight: bolder;
                 }
+            }
+            .subs-title{
+                text-transform: uppercase;
+                text-align: center;
+                font-weight: bold;
+                font-family: $ubuntu;
+                font-size: 20px;
+                margin-bottom: 1em;
+            }
+            .price{
+                font-weight: bold;
+                margin: 2em auto;
+                font-size: 18px;
+            }
+            .text{
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 1em;
+                font-family: $font-family;
+                font-weight: bolder;
             }
 
             .call-to-action{
-                margin: 0 auto;
-                padding: 10px;
-                font-size: 14px;
-                &:hover{
-                    background-color: $green;
-                    font-weight: bold;
-                }
+                position: absolute;
+                transform: translate(-50%, -50%);
+                left: 50%;
+                bottom: -3%;
+                width: 92%;
+                margin: auto;
+                text-align: center;
+                background: #202020;
             }
-        }
-
-        .tarif:nth-child(2){
-            border: 1px solid $green;
-            border-radius: 4px;
         }
     }
 }
 
 .footer{
-    width: 85%;
+    // width: 85%;
     margin: 7em 0 2em auto;
     border-top: 1px solid #f2f2f2;
     .header{
@@ -328,10 +334,48 @@
         justify-content: space-between;
         align-items: flex-start;
         p{
+            color: white;
             text-align: left;
         }
     }
     p:last-child{
         text-align: center;
     }
+}
+
+.body-element > .showcase, .body-element > .details,
+.body-element > .tarifs, .body-element > .footer{
+    animation: fade-in linear both;
+    animation-timeline: view();
+    animation-range: entry 50% cover 50%;
+}
+.body-element > .scroller{
+    animation: scroller linear both;
+    animation-timeline: scroll();
+    background: $green;
+    height: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 99999999999;
+}
+
+@keyframes scroller {
+
+    0% { width: 0 }
+    10% { background: #8FB227; }
+    20% { background: #27B24C; }
+    30% { background: #3E6047; }
+    40% { background: #275E76; }
+    50% { background: #4B1D67; }
+    60% { background: #B72560; }
+    70% { background: #301D54; }
+    90% { background: $green; }
+    100% { width: 100% }
+
+}
+@keyframes fade-in {
+
+    from { scale: .8; opacity: 0; }
+    to { scale: 1; opacity: 1; }
+
 }
