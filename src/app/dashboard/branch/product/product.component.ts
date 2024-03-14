@@ -40,6 +40,7 @@ export class ProductComponent {
   getBranchId: any
 
   accountType: any
+  socket: any
 
   constructor(
     private websocketService: WebsocketService,
@@ -71,9 +72,9 @@ export class ProductComponent {
       .subscribe((res: any)=> {
         if(res.message === "added to the queue"){
 
-          this.websocketService.connect(`ws://${environment.ws_url}ws/items/${this.getBranchId}`);
+          this.socket = this.websocketService.connect(`ws://${environment.ws_url}ws/items/${this.getBranchId}`);
 
-          this.websocketService.getMessages().subscribe((message) => {
+          this.socket.subscribe((message: any) => {
             this.user = this.api.getInfo()
             // console.log(message.items);
             this.datasource = message.items
@@ -83,6 +84,9 @@ export class ProductComponent {
             this.active = "Tous"
 
             this.data = this.datasource
+
+            // console.log(this.data);
+
 
             this.removeErrors()
 
@@ -95,9 +99,9 @@ export class ProductComponent {
         .subscribe((res: any) => {
 
           if (res.message === "added to the queue") {
-            this.websocketService.connect(`ws://${environment.ws_url}ws/resto/${this.getBranchId}`);
+            this.socket = this.websocketService.connect(`ws://${environment.ws_url}ws/resto/${this.getBranchId}`);
 
-            this.websocketService.getMessages().subscribe((message) => {
+            this.socket.subscribe((message: any) => {
 
               this.user = this.api.getInfo()
 
@@ -231,6 +235,11 @@ export class ProductComponent {
         }
       })
 
+  }
+
+  reduction = (percent: number, price: any) => {
+    var montant: any = (percent / 100) * parseFloat(price)
+    return montant.toFixed(1)
   }
 
 

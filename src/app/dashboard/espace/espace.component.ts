@@ -13,6 +13,7 @@ export class EspaceComponent {
 
   data !: any
   user !: any
+  socket: any
   has_access !: any
 
   subscription = [
@@ -64,13 +65,12 @@ export class EspaceComponent {
       user_id : this.user.user.user_id,
     }
 
-    this.websocketService.connect(
+    this.socket = this.websocketService.connect(
       `ws://${environment.ws_url}ws/getAllBranchs/${this.user.bness.b_id}`
     );
 
-    this.websocketService.sendMessage(JSON.stringify(ids))
-    this.websocketService.getMessages()
-    .subscribe((res: any) => {
+    this.socket.next(JSON.stringify(ids))
+    this.socket.subscribe((res: any) => {
       this.data = res
       // console.log(this.data)
       this.secureStorage.setItem("has_access", JSON.stringify(this.data.has_access))

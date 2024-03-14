@@ -67,7 +67,7 @@
                             </p>
                             <p class="price">
                                 {{ item.currency }}
-                                {{ item.price }}
+                                {{ item.price - reduction(item.discount_percentage, item.price) }}
                             </p>
                             <div class="stock">
                                 <p>
@@ -103,7 +103,7 @@
                             </p>
                             <p class="price">
                                 {{ item.currency }}
-                                {{ item.price[0] }}
+                                {{ item.price[0] - reduction(item.discount_percentage, item.price[0]) }}
                             </p>
                             <div class="stock">
                                 <p>
@@ -204,7 +204,7 @@
                         </table>
 
                         <p class="price">
-                            Prix: <span>{{ product.currency }} {{ product.price }}</span>
+                            Prix: <span>{{ product.currency }} {{ product.price - reduction(product.discount_percentage, product.price) }}</span>
                         </p>
                         <p class="price">
                             Réduction: <span>{{ product.discount }}</span>
@@ -295,7 +295,7 @@
                             <tbody>
                                 <tr *ngFor="let cell of product.size; let i = index">
                                     <td  >{{ cell }}</td>
-                                    <td >{{ product.price[i] }}</td>
+                                    <td >{{ product.price[i] - reduction(product.discount_percentage, product.price[i]) }}</td>
                                 </tr>
 
                             </tbody>

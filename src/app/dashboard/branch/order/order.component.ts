@@ -4,7 +4,14 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
+import { WebsocketService } from 'src/app/services/websocket.service';
+import { ApiService } from 'src/app/services/api.service';
+import { environment } from 'src/environments/environment';
+import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
+import { MatMenuModule } from '@angular/material/menu';
+import { HttpClient } from '@angular/common/http';
+import { LoadingModule } from 'src/app/loading/loading.module';
 
 @Component({
   selector: 'app-order',
@@ -16,6 +23,8 @@ import { CommonModule } from '@angular/common';
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatMenuModule,
+    LoadingModule,
     CommonModule
   ],
 })
@@ -23,114 +32,131 @@ export class OrderComponent {
 
   dateDebut : any = ""
   dateFin: any = new Date()
-  category = "Tous"
+  category = "En attente"
   categories = [
     "Tous",
     "Complet",
     "En attente",
     "Annuler",
-    // "DAB",
   ]
 
-  datasources = [
-    {
-      id: 1,
-      orderId: "# 758540997",
-      name: "Bracelet",
-      photo: "https://www.bijourama.com/media/produits/maserati/img/montre-homme--maserati-traguardo--r8873612048-bracelet-acier-noir_r8873612048-1_1140x1140.jpg",
-      orderDate: "05/01/2024",
-      currency: "$",
-      price: 45,
-      status: "En attente",
-      orderType: "Normal",
-      deliveringDate: "20/01/2024"
-    },
-    {
-      id: 2,
-      orderId: "# 40976909",
-      name: "Nike",
-      photo: "https://static.nike.com/a/images/t_default/99486859-0ff3-46b4-949b-2d16af2ad421/custom-nike-dunk-high-by-you-shoes.png",
-      orderDate: "03/01/2024",
-      currency: "$",
-      price: 70,
-      status: "Complet",
-      orderType: "Priorité",
-      deliveringDate: "04/01/2024"
-    },
-    {
-      id: 3,
-      orderId: "# 5464246363",
-      name: "D&G",
-      photo: "https://i3.optical-center.fr/workspace_prods/DOLCE--GABBANA-DG-4437-501-87-51-20-33981_HD.jpg?1689108323",
-      orderDate: "02/01/2024",
-      currency: "$",
-      price: 145,
-      status: "En attente",
-      orderType: "Priorité",
-      deliveringDate: "03/01/2024"
-    },
-    {
-      id: 4,
-      orderId: "# 4695827529",
-      name: "Ceinture",
-      photo: "https://www.paulmarius.fr/media/catalog/product/p/a/paulmarius_france_ceinture_cuir_marron_beige_boucle_laiton_reglable_homme_femme_9da5.jpg",
-      orderDate: "06/01/2024",
-      currency: "$",
-      price: 445,
-      status: "Annuler",
-      orderType: "Normal",
-      deliveringDate: "10/01/2024"
-    },
-    {
-      id: 5,
-      orderId: "# 98572858249",
-      name: "Costume",
-      photo: "https://www.cdiscount.com/pdt2/3/1/0/1/700x700/mp02445310/rw/costume-trois-pieces-slim-fit-par-cloud-style-noir.jpg",
-      orderDate: "01/01/2024",
-      currency: "$",
-      price: 100,
-      status: "Complet",
-      orderType: "Normal",
-      deliveringDate: "05/01/2024"
-    },
-    {
-      id: 6,
-      orderId: "# 5376383653",
-      name: "Pull",
-      photo: "https://www.niagara-pressing.fr/wp-content/uploads/2019/08/Pull.jpg",
-      orderDate: "02/01/2024",
-      currency: "$",
-      price: 1045,
-      status: "Annuler",
-      orderType: "Priorité",
-      deliveringDate: "03/01/2024"
-    },
-  ]
+  isLoading = false
+
+  datasources = []
 
   datasource: any[] = []
-  product : any
+  product: any
+  user: any
+  params: any
+  websoket : any
 
   constructor(
-    private element: ElementRef
+    private element: ElementRef,
+    private socket: WebsocketService,
+    private api: ApiService,
+    private snapParams: ActivatedRoute,
+    private http: HttpClient
   ) {
 
   }
 
   ngOnInit() {
 
-    this.category = "Tous"
+    this.isLoading = true
+
+    this.loading()
+
     this.dateFin = new Date();
     this.dateDebut = new Date(this.dateFin);
     // this.dateDebut.setDate(this.dateFin.getDate() - 3);
     this.dateDebut.setDate(1);
 
+    this.user = this.api.getInfo()
+
+    this.params = this.snapParams.snapshot.queryParamMap.get('id')
+
+    this.getData()
+
     this.filteredAndSorted()
+
+
+
+  }
+
+  getData = () => {
+
+    this.websoket = this.socket.connect(`ws://${environment.logistic}ws/getOrders/${this.user.bness.b_id}/${this.params.toString()}`)
+
+    this.websoket.subscribe((res: any) => {
+
+      this.datasources = res.data
+
+      this.datasources.forEach((value: any) => {
+        value.command_date = this.convertDateFormat(this.arrangeDateFormat(value.command_date))
+      })
+
+      this.datasource = this.datasources
+
+      this.filterOrder(this.category)
+    })
+
+  }
+
+  convertDateFormat(dateString: string): string {
+
+    const parts = dateString.split('/');
+
+    const date = new Date(+parts[2], +parts[1] - 1, +parts[0]);
+
+    date.setHours(23, 0, 0, 0);
+
+    const convertedDate = date.toISOString();
+
+    return convertedDate;
+  }
+
+
+  onUpdateStatus = (value: any, myStatus: any) => {
+    // console.log(value, myStatus);
+
+    this.datasource.forEach((e: any) => {
+      if (e === value) {
+        e.status = myStatus
+      }
+    })
+
+    var status = 0
+
+    if (myStatus === "Complet") {
+      status = 1
+    }
+    else if(myStatus === "En attente") {
+      status = 0
+    }
+    else {
+      status = -1
+    }
+
+    const data = {
+      b_id: value.b_id,
+      branch_id: value.branch_id,
+      command_id: value.command_id,
+      photo_id: value.photo_id,
+      product_id: value.product_id,
+      status: status,
+    }
+
+    this.http.put(`${environment.logisticUrl}order`, data)
+    .subscribe((res: any)=> console.log(res) )
   }
 
   filteredAndSorted = () => {
-    this.datasource = this.datasources.filter(item => item.orderType === "Priorité").concat(
-      this.datasources.filter(item => item.orderType !== "Priorité")
+    this.datasource = this.datasources.filter((item: any) => item.orderType === "Priorité").concat(
+      this.datasources.filter((item: any) => item.orderType !== "Priorité")
     );
+
+    this.isLoading = false
+    this.loading()
   }
 
   getMonthDay = (myDate: any) => {
@@ -157,7 +183,7 @@ export class OrderComponent {
       this.datasource = this.datasources
       this.filteredDatasource()
     } else {
-      this.datasource = this.datasources.filter(item => item.status === value)
+      this.datasource = this.datasources.filter((item: any) => item.status === value)
       this.filteredDatasource()
     }
   }
@@ -168,7 +194,7 @@ export class OrderComponent {
       this.datasource = this.datasources
       this.filteredDatasource()
     } else {
-      this.datasource = this.datasources.filter(e =>
+      this.datasource = this.datasources.filter((e: any) =>
         e.name.toLowerCase().includes(this.product.toLowerCase()) ||
         e.orderId.toLowerCase().includes(this.product.toLowerCase())
       )
@@ -183,15 +209,21 @@ export class OrderComponent {
     var _fin: any = new Date(this.dateFin)
     _debut = _debut.toISOString()
     _fin = _fin.toISOString()
+    // console.log(_debut);
 
-    this.datasource = this.datasources.filter(item => {
-      var orderDate: any = item.orderDate
-      orderDate = orderDate.split("/");
-      orderDate = new Date(`${orderDate[2]}-${orderDate[1]}-${orderDate[0]}`);
-      orderDate = orderDate.toISOString()
+
+    this.datasource = this.datasources.filter((item: any) => {
+
+      var orderDate: any = item.command_date
+      // orderDate = orderDate.split("/");
+      // orderDate = new Date(`${orderDate[2]}-${orderDate[1]}-${orderDate[0]}`);
+      // orderDate = orderDate.toISOString()
+      // console.log(orderDate);
 
       return orderDate >= _debut && orderDate <= _fin;
     });
+    // console.log(this.datasource);
+
     this.filteredDatasource()
   }
 
@@ -199,6 +231,27 @@ export class OrderComponent {
     this.datasource = this.datasource.filter(item => item.orderType === "Priorité").concat(
       this.datasource.filter(item => item.orderType !== "Priorité")
     );
+  }
+
+  arrangeDateFormat = (myDate: any) => {
+
+    var newValue = myDate.toString()
+
+    return newValue.slice(8,10) + "/" + newValue.slice(5,7) +"/"+ newValue.slice(0, 4)
+
+  }
+
+  loading = () => {
+    if (this.isLoading) {
+      Swal.fire({
+        text: "Chargement des données...",
+        didOpen: () => {
+          Swal.showLoading()
+        }
+      })
+    } else {
+      Swal.close()
+    }
   }
 
 }

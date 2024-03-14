@@ -84,22 +84,23 @@
                 <tbody>
                     <tr *ngFor="let data of datasource">
                         <td>{{ data.id }}</td>
-                        <td>{{ data.orderId }}</td>
+                        <td>{{ data.command_id }}</td>
                         <td class="produit">
                             <img
                                 [src]="data.photo"
-                                [alt]="data.name"
+                                [alt]="data.nom_produit"
                             >
                             <p>
-                                {{ data.name }}
+                                {{ data.nom_produit }}
                             </p>
                         </td>
-                        <td>{{data.orderDate}}</td>
+                        <td>{{arrangeDateFormat(data.command_date)}}</td>
                         <td [ngClass]="{'priority': data.orderType === 'Priorité', 'not-priority': data.orderType !== 'Priorité'}" >{{ data.orderType }}</td>
                         <td>{{ data.currency }} {{ data.price }}</td>
-                        <td>{{ data.deliveringDate }}</td>
+                        <td>{{ arrangeDateFormat(data.date_prevu_livraison) }}</td>
                         <td>
                             <span
+                                mat-button [matMenuTriggerFor]="menu"
                                 [ngClass]="{
                                     'pending' : data.status === 'En attente',
                                     'complet': data.status === 'Complet',
@@ -108,6 +109,11 @@
                             >
                                 {{ data.status }}
                             </span>
+                            <mat-menu #menu="matMenu">
+                                <button (click)="onUpdateStatus(data, 'En attente')" mat-menu-item>En attente</button>
+                                <button mat-menu-item (click)="onUpdateStatus(data, 'Complet')">Complet</button>
+                                <button mat-menu-item (click)="onUpdateStatus(data, 'Annuler')">Annuler</button>
+                            </mat-menu>
                         </td>
                     </tr>
                 </tbody>

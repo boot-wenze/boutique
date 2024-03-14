@@ -33,6 +33,7 @@ export class SettingsComponent {
 
   data: any;
   datasource: any;
+  socket: any;
 
   // panel : string = "Gérer vos collaborateurs"
   panel: string = 'Ajouter un collaborateur';
@@ -62,11 +63,11 @@ export class SettingsComponent {
     if (name == 'Gérer vos collaborateurs' || name == 'Vos collaborateurs') {
       this.api.get('user').subscribe((res: any) => {
         if (res.message === 'Request queued') {
-          this.websocketService.connect(
+          this.socket = this.websocketService.connect(
             `ws://${environment.ws_url}ws/branchs/${this.user.bness.b_id}`
           );
 
-          this.websocketService.getMessages().subscribe((res: any) => {
+          this.socket.subscribe((res: any) => {
             this.data = res;
             // console.log(this.data);
           });
@@ -79,12 +80,12 @@ export class SettingsComponent {
         user_id: this.user.user.user_id,
       };
 
-      this.websocketService.connect(
+      this.socket = this.websocketService.connect(
         `ws://${environment.ws_url}ws/getAllBranchs/${this.user.bness.b_id}`
       );
 
-      this.websocketService.sendMessage(JSON.stringify(ids));
-      this.websocketService.getMessages().subscribe((res: any) => {
+      this.socket.next(JSON.stringify(ids));
+      this.socket.subscribe((res: any) => {
         this.data = res.branch;
         this.datasource = res;
         console.log(this.datasource);
@@ -132,13 +133,13 @@ export class SettingsComponent {
         this.isLoading = true;
         this.loading();
 
-        this.websocketService.connect(
+        this.socket = this.websocketService.connect(
           `ws://${environment.ws_url}ws/add_user/${this.user.branch[0].managed_by}`
         );
 
-        this.websocketService.sendMessage(JSON.stringify(data));
+        this.socket.next(JSON.stringify(data));
 
-        this.websocketService.getMessages().subscribe((res: any) => {
+        this.socket.subscribe((res: any) => {
           this.permission = '';
           this.first_name = '';
           this.last_name = '';

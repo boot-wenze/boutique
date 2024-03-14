@@ -26,6 +26,7 @@ export class CreateBranchComponent {
   managed_by = ""
   isLoading = false
   data : any
+  socket : any
 
   constructor(
     private client: ApiService,
@@ -49,12 +50,11 @@ export class CreateBranchComponent {
     .subscribe((res: any) => res)
 
 
-    this.websocketService.connect(
+    this.socket = this.websocketService.connect(
       `ws://${environment.ws_url}ws/branchs/${this.user.bness.b_id}`
     );
 
-    this.websocketService.getMessages()
-    .subscribe((res: any) => {
+    this.socket.subscribe((res: any) => {
       this.data = res
 
     })

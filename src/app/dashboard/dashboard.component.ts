@@ -13,8 +13,8 @@ export class DashboardComponent {
   ) { }
 
   ngOnInit(): void {
-    this.isLoading = true
-    setTimeout(()=> this.isLoading = false, 200)
+    // this.isLoading = true
+    // setTimeout(()=> this.isLoading = false, 200)
 
   }
 

@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { BranchComponent } from './branch.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { SettingsComponent } from './settings/settings.component';
+import { OrderComponent } from './order/order.component';
+import { ProductComponent } from './product/product.component';
 
 const routes: Routes = [
   {
@@ -16,11 +18,11 @@ const routes: Routes = [
       },
       {
         path: "order",
-        loadChildren: () => import("./order/order-routing.module").then(m => m.OrderRoutingModule)
+        component: OrderComponent
       },
       {
         path: "product",
-        loadChildren: () => import("./product/product-routing.module").then(m => m.ProductRoutingModule)
+        component: ProductComponent
       },
       {
         path: "product/add-product",
